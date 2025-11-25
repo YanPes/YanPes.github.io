@@ -16,6 +16,9 @@ export default defineConfig({
         {
           url: '/reading-list/',
         },
+        {
+          url: '/about/',
+        },
       ],
     },
   },
