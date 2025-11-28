@@ -50,7 +50,7 @@ const books = [
 ];
 
 const Index = () => (
-  <div className="container-box">
+  <div>
     Hello from Reading List
     <ul>
       {books.map(book => (
