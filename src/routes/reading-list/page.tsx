@@ -1,3 +1,12 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/table/table';
+
 const books = [
   {
     title:
@@ -51,17 +60,29 @@ const books = [
 
 const Index = () => (
   <div>
-    Hello from Reading List
-    <ul>
-      {books.map(book => (
-        <li key={book.title}>
-          <span>
-            <strong>{book.title}</strong>
-          </span>{' '}
-          | <span>{book.author}</span>
-        </li>
-      ))}
-    </ul>
+    <h1>Reading List</h1>
+    <p>
+      Welcome to my reading list — a personal collection of books that have
+      inspired me, challenged my thinking, or simply sparked my curiosity. I use
+      this space to keep track of the books I’ve read along the way. Maybe
+      you’ll find something here that resonates with you as well.
+    </p>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Title</TableHead>
+          <TableHead>Author</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {books.map(book => (
+          <TableRow key={book.title}>
+            <TableCell key={book.title}>{book.title}</TableCell>
+            <TableCell key={book.author}>{book.author}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   </div>
 );
 

@@ -1,6 +1,7 @@
 import { Helmet } from '@modern-js/runtime/head';
 import { Outlet } from '@modern-js/runtime/router';
 import './index.css';
+import Navigation from '@/components/navigation/navigation';
 
 export default function Layout() {
   return (
@@ -10,10 +11,6 @@ export default function Layout() {
           rel="icon"
           type="image/x-icon"
           href="https://lf3-static.bytednsdoc.com/obj/eden-cn/uhbfnupenuhf/favicon.ico"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
-          rel="stylesheet"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -26,7 +23,10 @@ export default function Layout() {
           rel="stylesheet"
         />
       </Helmet>
-      <div>
+      <div className={'container'}>
+        <header>
+          <Navigation />
+        </header>
         <main>
           <Outlet />
         </main>
