@@ -1,11 +1,258 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+<section class="hero">
+  <h1>Building scalable systems,<br>one component at a time.</h1>
+  <p class="subtitle">Software Engineer & Technical Writer</p>
+  <p class="description">
+  I write about software architecture, microfrontends, and system design. 
+  Sharing insights from building distributed systems and modern web applications.
+  </p>
+  <div class="cta-buttons">
+    <a href="/blog.html" class="btn btn-primary">Read My Writing</a>
+    <a href="https://github.com/YanPes" class="btn btn-secondary" target="_blank" rel="noopener">View GitHub</a>
+  </div>
+</section>
+
+<section>
+  <h2>Recent Articles</h2>
+  <div class="blog-preview">
+    <article class="article-card">
+      <div class="article-meta">January 2026 · 8 min read</div>
+      <h3>Module Federation in Practice: Lessons from Production</h3>
+      <p class="article-excerpt">
+        After implementing module federation across multiple teams, I've learned what works 
+        and what doesn't. Here are the patterns that emerged from real-world usage.
+      </p>
+    </article>
+
+    <article class="article-card">
+      <div class="article-meta">December 2025 · 12 min read</div>
+      <h3>The State of Microfrontends: Architecture Patterns That Scale</h3>
+      <p class="article-excerpt">
+        A deep dive into microfrontend architectures, comparing build-time integration, 
+        runtime composition, and edge-side includes for different use cases.
+      </p>
+    </article>
+
+    <article class="article-card">
+      <div class="article-meta">November 2025 · 6 min read</div>
+      <h3>System Design Principles: Composability Over Complexity</h3>
+      <p class="article-excerpt">
+        Why breaking systems into composable pieces leads to more maintainable architectures, 
+        and how to identify the right boundaries.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>About Me</h2>
+  <div class="about-grid">
+    <p class="bio">
+      I'm a software engineer focused on building scalable web applications and distributed systems. 
+      My work centers on frontend architecture, microfrontends, and creating maintainable codebases 
+      that teams can evolve over time. I believe in sharing knowledge and learning in public.
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-label">Focus Areas</div>
+        <div class="stat-value">Architecture, Microfrontends</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Location</div>
+        <div class="stat-value">Schwäbisch Gmünd, DE</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Currently</div>
+        <div class="stat-value">Building & Writing</div>
+      </div>
+    </div>
+  </div>
+</section>
 </Layout>
+
+<style>
+.hero {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.03em;
+}
+
+.hero .subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-bottom: var(--spacing-md);
+}
+
+.hero .description {
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin-bottom: var(--spacing-md);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  font-family: var(--font-sans);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-secondary);
+}
+
+
+.blog-preview {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.article-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.article-card:last-child {
+  border-bottom: none;
+}
+
+.article-meta {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-card h3 {
+  transition: color 0.2s ease;
+  margin-bottom: var(--spacing-xs);
+}
+
+.article-card:hover h3 {
+  color: var(--text-secondary);
+}
+
+.article-excerpt {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.about-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.bio {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.stat-item {
+  padding: var(--spacing-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+</style>
+
+<script>
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = document.querySelector('.theme-icon');
+  const html = document.documentElement;
+
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  if (themeIcon) {
+    themeIcon.textContent = currentTheme === 'dark' ? '☀' : '☾';
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeIcon.textContent = newTheme === 'dark' ? '☀' : '☾';
+      });
+    }
+  }
+
+
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (currentPath === href || (currentPath === '/' && href === '/')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
