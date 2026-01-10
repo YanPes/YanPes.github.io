@@ -4,104 +4,120 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout 
   title="About — Yannik Peschke" 
-  description="Learn more about Yannik Peschke, software engineer specializing in frontend architecture and distributed systems."
+  description="Learn more about Yannik Peschke, Frontend Software Architect specializing in micro-frontend architectures and the Rspack ecosystem."
 >
 
 <h1>About Me</h1>
 
 <p class="intro">
-  Software engineer with a passion for building scalable web applications and sharing knowledge through writing.
+  I'm a Frontend Software Architect who thrives on building scalable web ecosystems. My professional journey is focused on decoupling large-scale systems and fostering collaboration among development teams.
 </p>
 
 <p>
-  I specialize in frontend architecture, with a particular focus on microfrontends and distributed systems. 
-  My work involves designing systems that allow multiple teams to work independently while maintaining 
-  consistency and performance across the entire application.
+  Outside of work, you'll find me trading code for mountain trails and good books, always seeking new ways to learn and grow.
 </p>
+
+<h2>Work & Expertise</h2>
 
 <p>
-  Over the years, I've learned that the best architectures aren't the most complex ones, but those that 
-  are composable, maintainable, and aligned with how teams actually work. I believe in pragmatic solutions 
-  that solve real problems rather than following trends blindly.
+  As a Frontend Software Architect at Festo, I focus on transforming complex, monolithic web systems into dynamic, interconnected micro-frontend architectures. My main responsibility is the technical orchestration of frontends, enabling decentralized teams to work efficiently on a shared customer journey. In this role, I ensure our systems are performant, secure, resilient, and communicate seamlessly. I also own onboarding and governance documents and serve as a technical mentor and consultant for developers, stakeholders, and design teams.
 </p>
+
+<h2>Off-Screen Balance</h2>
 
 <p>
-  When I'm not coding, I enjoy reading technical books, exploring new technologies, and writing about 
-  what I've learned. I'm based in Schwäbisch Gmünd, Germany, and I'm always open to interesting 
-  conversations about software architecture and engineering practices.
+  To maintain my productivity and mental balance, I enjoy spending my free time away from the screen:
 </p>
 
-<h2>Experience & Focus Areas</h2>
+<ul class="balance-list">
+  <li>Trail running & hiking in the mountains</li>
+  <li>Alpine skiing</li>
+  <li>Reading & cooking</li>
+  <li>Exploring nature and other cultures with my girlfriend</li>
+</ul>
 
-<div class="experience-grid">
-  <div class="experience-item">
-    <div class="experience-header">
-      <div class="experience-title">Frontend Architecture</div>
-      <div class="experience-period">Current Focus</div>
-    </div>
-    <p class="experience-description">
-      Designing and implementing scalable frontend architectures using microfrontend patterns, 
-      module federation, and modern web technologies. Focus on team autonomy, independent deployments, 
-      and maintaining consistency across distributed systems.
+<p>
+  When I do find time for private coding, it's usually for research or tinkering with my Neovim configuration.
+</p>
+
+<h2>Languages & Libraries</h2>
+
+<div class="skills-grid">
+  <div class="skill-category">
+    <h3>Classic Frontend</h3>
+    <p class="skill-list">
+      Yes, I learned frontend when jQuery was the GOAT! Having a solid foundation on classic technology without abstraction layers is mandatory to actually understand any advanced framework or toolkit (looking at you React and Tailwind).
+    </p>
+    <p class="skill-list">
+      HTML5, Handlebars, CSS3, Sass, Javascript, jQuery, NodeJs
     </p>
   </div>
 
-  <div class="experience-item">
-    <div class="experience-header">
-      <div class="experience-title">System Design</div>
-      <div class="experience-period">Core Expertise</div>
-    </div>
-    <p class="experience-description">
-      Creating composable systems that scale with organization growth. Experience with distributed 
-      architectures, API design, and building systems that balance complexity with maintainability. 
-      Strong focus on identifying the right boundaries and abstractions.
+  <div class="skill-category">
+    <h3>Modern Frontend</h3>
+    <p class="skill-list">
+      Advanced tools I work with for modern web application development with a focus on first level citizen products for micro frontend architectures.
+    </p>
+    <p class="skill-list">
+      TypeScript, React, ModernJs, Rsbuild, Rslib, Rspress, Playwrite, Rstest, ModuleFederation
     </p>
   </div>
 
-  <div class="experience-item">
-    <div class="experience-header">
-      <div class="experience-title">Technical Writing</div>
-      <div class="experience-period">Ongoing</div>
-    </div>
-    <p class="experience-description">
-      Writing in-depth articles about software architecture, microfrontends, and lessons learned 
-      from building production systems. Sharing practical insights and patterns that emerge from 
-      real-world implementations.
+  <div class="skill-category">
+    <h3>Bundler</h3>
+    <p class="skill-list">
+      It is my daily business to adapt, maintain and modernize/migrate bundlers to keep pipeline performance, frontend infrastructure and developer experience on a peak level. This also includes writing custom Rspack plugins (Rust bundler following the amazing API architecture philosophy of Webpack).
+    </p>
+    <p class="skill-list">
+      Rspack, Webpack, Gulp, Bower, Grunt
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Infra</h3>
+    <p class="skill-list">
+      I am not a DevOps specialist but I am familiar configuring my own docker-compose files, gitlab pipelines and reverse-proxy rules on my own.
+    </p>
+    <p class="skill-list">
+      Gitlab, Docker, Kubernetes, Traefik
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Generic</h3>
+    <p class="skill-list">
+      Additional tech I like to use to keep the work rolling.
+    </p>
+    <p class="skill-list">
+      OAuth, OpenApi, Lua, Neovim, SonarQube, Bash, Git
     </p>
   </div>
 </div>
 
-<h2>Core Skills</h2>
+<h2>My Dev Setup</h2>
+
+<p>
+  I'm a strong believer in a highly customized and efficient development environment. My setup is built around a few key tools that help me stay productive and focused.
+</p>
 
 <div class="skills-grid">
   <div class="skill-category">
-    <h3>Architecture</h3>
+    <h3>Operating System</h3>
     <p class="skill-list">
-      Microfrontends, Module Federation, System Design, Distributed Systems, API Design, 
-      Domain-Driven Design, Event-Driven Architecture
+      My go-to setup is Arch Linux paired with Hyprland, a dynamic tiling Wayland compositor, to manage my windows and workspaces with ease. Unfortunately, I am bound to a Windows machine at work trying by best to be friends with WSL 🙈
     </p>
   </div>
 
   <div class="skill-category">
-    <h3>Frontend</h3>
-    <p class="skill-list">
-      TypeScript, React, Web Components, Build Tools (Webpack, Vite), State Management, 
-      Performance Optimization, Accessibility
-    </p>
-  </div>
-
-  <div class="skill-category">
-    <h3>Backend & Infrastructure</h3>
-    <p class="skill-list">
-      Node.js, REST APIs, GraphQL, Docker, CI/CD, Testing Strategies, Monitoring & Observability
-    </p>
-  </div>
-
-  <div class="skill-category">
-    <h3>Practices</h3>
-    <p class="skill-list">
-      Technical Writing, Code Review, Mentoring, Agile Methodologies, Documentation, 
-      Cross-Team Collaboration
+    <h3>Core Tools</h3>
+    <ul class="tool-list">
+      <li><strong>Neovim:</strong> My custom-built Neovim configuration is the heart of my coding workflow. It's a lightweight, powerful, and keyboard-centric editor tailored to my needs.</li>
+      <li><strong>IdeaVim:</strong> For my work with JetBrains IDEs like IntelliJ, I use the IdeaVim plugin. This allows me to replicate my efficient, keyboard-driven Neovim experience within a more feature-rich environment, ensuring a consistent workflow.</li>
+      <li><strong>Tmux:</strong> I use Tmux to manage multiple terminal sessions and windows from a single screen. This lets me handle different tasks—from running tests to monitoring logs—without ever leaving my terminal.</li>
+      <li><strong>Lazygit & LazyDocker:</strong> To interact with Git and Docker in a fast and intuitive way, I rely on these two tools. They provide a simple, terminal-based user interface that makes complex tasks quick and effortless.</li>
+    </ul>
+    <p class="skill-list" style="margin-top: var(--spacing-sm);">
+      My entire setup is designed to be fast, keyboard-driven, and distraction-free, allowing me to fully immerse myself in the code.
     </p>
   </div>
 </div>
@@ -200,6 +216,51 @@ import Layout from '../layouts/Layout.astro';
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
+  margin-bottom: var(--spacing-sm);
+}
+
+.skill-list:last-of-type {
+  margin-bottom: 0;
+}
+
+.balance-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+  color: var(--text-secondary);
+}
+
+.balance-list li {
+  padding: var(--spacing-xs) 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.balance-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.tool-list li {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tool-list li:last-child {
+  margin-bottom: 0;
+}
+
+.tool-list strong {
+  color: var(--text-primary);
 }
 
 .contact-section {
