@@ -1,11 +1,20 @@
+---
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => {
+  if (path === '/' && currentPath === '/') return true;
+  if (path !== '/' && currentPath.startsWith(path)) return true;
+  return false;
+};
+---
+
 <nav>
   <a href="/" class="logo">Yannik Peschke</a>
   <ul class="nav-links">
-    <li><a href="/" class="active">Home</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="/reading-list.html">Reading List</a></li>
-    <li><a href="/what-i-use.html">What I Use</a></li>
+    <li><a href="/" class={isActive('/') ? 'active' : ''}>Home</a></li>
+    <li><a href="/about" class={isActive('/about') ? 'active' : ''}>About</a></li>
+    <li><a href="/blog" class={isActive('/blog') ? 'active' : ''}>Blog</a></li>
+    <li><a href="/reading-list" class={isActive('/reading-list') ? 'active' : ''}>Reading List</a></li>
+    <li><a href="/what-i-use" class={isActive('/what-i-use') ? 'active' : ''}>What I Use</a></li>
   </ul>
   <button class="theme-toggle" aria-label="Toggle dark mode">
     <span class="theme-icon">☾</span>
@@ -68,4 +77,31 @@ nav {
 .theme-toggle:hover {
   color: var(--text-primary);
 }
+
+@media (max-width: 768px) {
+  nav {
+    padding: var(--spacing-sm);
+  }
+
+  .nav-links {
+    gap: var(--spacing-sm);
+  }
+}
 </style>
+
+<script>
+  // Client-side active state update for better UX
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '/' && currentPath === '/') {
+      link.classList.add('active');
+    } else if (href !== '/' && currentPath.startsWith(href)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>

@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="What I Use — Yannik Peschke" 
+  description="Tools, frameworks, and technologies I use for software development."
+>
+
+<h1>What I Use</h1>
+<p class="page-intro">
+  The tools, frameworks, and technologies I use for software development. This list reflects my current 
+  preferences and the stack I'm most productive with.
+</p>
+
+<section class="category-section">
+  <h2>Languages & Frameworks</h2>
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">TypeScript</div>
+      <div class="tool-description">
+        Primary language for frontend and backend work. The type system catches bugs early and makes 
+        refactoring safer, especially in large codebases.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">React</div>
+      <div class="tool-description">
+        Main frontend framework. Component-based architecture works well for both small applications 
+        and large-scale microfrontend systems.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Node.js</div>
+      <div class="tool-description">
+        Backend runtime for APIs and tooling. Sharing TypeScript across frontend and backend reduces 
+        context switching and enables code sharing.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Next.js</div>
+      <div class="tool-description">
+        For server-rendered React applications. Good balance of features, performance, and developer 
+        experience for full-stack applications.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Build & Development Tools</h2>
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">Webpack</div>
+      <div class="tool-description">
+        Module bundler, especially for microfrontend architectures using Module Federation. Powerful 
+        but requires configuration expertise.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Vite</div>
+      <div class="tool-description">
+        Fast build tool for modern web projects. Great developer experience with instant HMR. Used 
+        for greenfield projects and prototypes.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">pnpm</div>
+      <div class="tool-description">
+        Package manager that's faster and more efficient than npm. Works well in monorepos with 
+        workspace support.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">ESLint & Prettier</div>
+      <div class="tool-description">
+        Code quality and formatting. ESLint catches potential bugs, Prettier keeps formatting consistent 
+        across the team.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Testing</h2>
+  <div class="simple-list">
+    <div class="simple-list-item">
+      <strong>Vitest</strong> — <span>Fast unit testing framework, excellent TypeScript support</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>React Testing Library</strong> — <span>Component testing focused on user behavior</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Playwright</strong> — <span>End-to-end testing across browsers</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>MSW</strong> — <span>Mock Service Worker for API mocking in tests</span>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Infrastructure & DevOps</h2>
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">Docker</div>
+      <div class="tool-description">
+        Containerization for consistent development and deployment environments. Essential for 
+        microservices architectures.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">GitHub Actions</div>
+      <div class="tool-description">
+        CI/CD pipelines for automated testing and deployment. Tight integration with GitHub repositories 
+        makes setup straightforward.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Kubernetes</div>
+      <div class="tool-description">
+        Container orchestration for production deployments. Steep learning curve but powerful for 
+        managing distributed systems.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Databases & Data</h2>
+  <div class="simple-list">
+    <div class="simple-list-item">
+      <strong>PostgreSQL</strong> — <span>Reliable relational database with excellent features</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Redis</strong> — <span>Caching and session storage</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Prisma</strong> — <span>Type-safe database client and ORM for TypeScript</span>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Development Environment</h2>
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">VS Code</div>
+      <div class="tool-description">
+        Primary editor. Excellent TypeScript support, great extension ecosystem, and fast performance.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">iTerm2 + zsh</div>
+      <div class="tool-description">
+        Terminal setup with oh-my-zsh for improved command line experience. Customized with plugins 
+        for git, auto-suggestions, and syntax highlighting.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Git</div>
+      <div class="tool-description">
+        Version control. Using conventional commits for clear history and automated changelog generation.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Monitoring & Observability</h2>
+  <div class="simple-list">
+    <div class="simple-list-item">
+      <strong>Sentry</strong> — <span>Error tracking and performance monitoring</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Grafana</strong> — <span>Metrics visualization and dashboards</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Prometheus</strong> — <span>Metrics collection and alerting</span>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Design & Documentation</h2>
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">Figma</div>
+      <div class="tool-description">
+        Collaborative design tool. Great for working with designers and creating component libraries 
+        that match code implementations.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Storybook</div>
+      <div class="tool-description">
+        Component documentation and isolated development. Helps maintain consistent UI components 
+        across teams.
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Notion</div>
+      <div class="tool-description">
+        Documentation and knowledge management. Good for architectural decision records and 
+        team documentation.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section">
+  <h2>Learning & Staying Current</h2>
+  <div class="simple-list">
+    <div class="simple-list-item">
+      <strong>GitHub</strong> — <span>Following interesting repositories and reading source code</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>RSS Reader</strong> — <span>Following engineering blogs and technical publications</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Technical Books</strong> — <span>Deep dives into fundamental concepts</span>
+    </div>
+    <div class="simple-list-item">
+      <strong>Conference Talks</strong> — <span>YouTube channels and conference recordings</span>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+.page-intro {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.category-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.tools-grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.tool-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tool-item:last-child {
+  border-bottom: none;
+}
+
+.tool-name {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.tool-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.simple-list {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.simple-list-item {
+  padding: var(--spacing-sm);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.simple-list-item strong {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.simple-list-item span {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .tool-item {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+}
+</style>

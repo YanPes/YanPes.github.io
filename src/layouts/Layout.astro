@@ -1,16 +1,30 @@
 ---
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Yannik Peschke — Software Engineer & Writer",
+	description = "Personal website of Yannik Peschke. Writing about software architecture, microfrontends, and system design.",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Yannik Peschke - Software Architect</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 	</head>
   <body>
     <Header />
@@ -80,6 +94,14 @@ section {
   margin-bottom: var(--spacing-xl);
 }
 
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.03em;
+}
+
 h2 {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 400;
@@ -93,4 +115,47 @@ h3 {
   margin-bottom: var(--spacing-xs);
   letter-spacing: -0.01em;
 }
+
+p {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+  }
+
+  main {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+}
 </style>
+
+<script>
+  // Theme toggle functionality
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = document.querySelector('.theme-icon');
+  const html = document.documentElement;
+
+  // Check for saved theme preference or default to light
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  if (themeIcon) {
+    themeIcon.textContent = currentTheme === 'dark' ? '☀' : '☾';
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      if (themeIcon) {
+        themeIcon.textContent = newTheme === 'dark' ? '☀' : '☾';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,317 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Reading List — Yannik Peschke" 
+  description="Books and reading recommendations about software engineering, architecture, and system design."
+>
+
+<h1>Reading List</h1>
+<p class="page-intro">
+  Books that shaped my thinking on software engineering, system design, and building better software. 
+  These are recommendations for anyone interested in deepening their understanding of these topics.
+</p>
+
+<h2>Architecture & Design</h2>
+<div class="book-list">
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Building Microservices</h3>
+      <p class="book-author">Sam Newman</p>
+      <p class="book-description">
+        The definitive guide to microservices architecture. Newman covers everything from identifying service 
+        boundaries to deployment strategies, monitoring, and organizational impact. Essential reading for 
+        understanding distributed systems.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Architecture</span>
+        <span class="book-tag">Microservices</span>
+        <span class="book-tag">System Design</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Domain-Driven Design</h3>
+      <p class="book-author">Eric Evans</p>
+      <p class="book-description">
+        The classic text on DDD. While dense, it's invaluable for learning how to model complex domains and 
+        establish a shared language between technical and business teams. The concepts of bounded contexts 
+        and aggregates are fundamental to good architecture.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Architecture</span>
+        <span class="book-tag">Domain Modeling</span>
+        <span class="book-tag">Design Patterns</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Designing Data-Intensive Applications</h3>
+      <p class="book-author">Martin Kleppmann</p>
+      <p class="book-description">
+        An incredible deep dive into the fundamentals of data systems. Covers databases, distributed systems, 
+        consistency models, and how modern applications handle data at scale. Accessible yet thorough.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">System Design</span>
+        <span class="book-tag">Databases</span>
+        <span class="book-tag">Distributed Systems</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Software Architecture: The Hard Parts</h3>
+      <p class="book-author">Neal Ford, Mark Richards, et al.</p>
+      <p class="book-description">
+        Focuses on the difficult architectural decisions: where to split services, how to manage data ownership, 
+        handling distributed transactions, and navigating trade-offs. Practical guidance for real-world challenges.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Architecture</span>
+        <span class="book-tag">Decision Making</span>
+        <span class="book-tag">Trade-offs</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Frontend & Web Development</h2>
+<div class="book-list">
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Micro Frontends in Action</h3>
+      <p class="book-author">Michael Geers</p>
+      <p class="book-description">
+        Practical guide to implementing microfrontends. Covers different integration techniques, team organization, 
+        and real-world patterns. Great for understanding when microfrontends make sense and how to implement them 
+        effectively.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Microfrontends</span>
+        <span class="book-tag">Frontend</span>
+        <span class="book-tag">Architecture</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>High Performance Browser Networking</h3>
+      <p class="book-author">Ilya Grigorik</p>
+      <p class="book-description">
+        Essential understanding of how the web actually works. From TCP/IP to HTTP/2, WebSockets, and performance 
+        optimization. Knowing these fundamentals makes you a better frontend engineer.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Performance</span>
+        <span class="book-tag">Networking</span>
+        <span class="book-tag">Web</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Software Craft</h2>
+<div class="book-list">
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>The Pragmatic Programmer</h3>
+      <p class="book-author">David Thomas, Andrew Hunt</p>
+      <p class="book-description">
+        Timeless advice on being a better software developer. Covers everything from code organization to career 
+        development. The 20th anniversary edition has been updated but the core principles remain relevant.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Best Practices</span>
+        <span class="book-tag">Career</span>
+        <span class="book-tag">Fundamentals</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>A Philosophy of Software Design</h3>
+      <p class="book-author">John Ousterhout</p>
+      <p class="book-description">
+        Short but impactful book about managing complexity in software. Ousterhout's ideas about deep modules, 
+        information hiding, and when abstraction helps versus hurts are incredibly valuable. Changed how I think 
+        about API design.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Design</span>
+        <span class="book-tag">Complexity</span>
+        <span class="book-tag">Philosophy</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Working Effectively with Legacy Code</h3>
+      <p class="book-author">Michael Feathers</p>
+      <p class="book-description">
+        Most developers spend more time maintaining existing systems than building new ones. This book provides 
+        strategies for safely refactoring and improving code you didn't write. Practical techniques for breaking 
+        dependencies and adding tests.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Refactoring</span>
+        <span class="book-tag">Testing</span>
+        <span class="book-tag">Maintenance</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Organization & Process</h2>
+<div class="book-list">
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Team Topologies</h3>
+      <p class="book-author">Matthew Skelton, Manuel Pais</p>
+      <p class="book-description">
+        How you organize teams impacts your architecture and vice versa. This book provides patterns for 
+        structuring teams to optimize for fast flow and clear ownership. Essential for understanding the 
+        organizational side of technical decisions.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">Organization</span>
+        <span class="book-tag">Teams</span>
+        <span class="book-tag">Architecture</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-item">
+    <div class="book-cover">BOOK</div>
+    <div class="book-info">
+      <h3>Accelerate</h3>
+      <p class="book-author">Nicole Forsgren, Jez Humble, Gene Kim</p>
+      <p class="book-description">
+        Data-driven insights into what makes high-performing technology organizations. Based on years of research, 
+        it identifies the key capabilities that drive software delivery performance. Backs up best practices with 
+        research.
+      </p>
+      <div class="book-tags">
+        <span class="book-tag">DevOps</span>
+        <span class="book-tag">Performance</span>
+        <span class="book-tag">Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</Layout>
+
+<style>
+.page-intro {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+h2 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+h2:first-of-type {
+  margin-top: 0;
+}
+
+.book-list {
+  display: grid;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.book-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.book-item:last-child {
+  border-bottom: none;
+}
+
+.book-cover {
+  width: 100px;
+  height: 150px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+}
+
+.book-info h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.book-author {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.book-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.book-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.book-tag {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .book-item {
+    grid-template-columns: 1fr;
+  }
+
+  .book-cover {
+    width: 100%;
+    height: 80px;
+  }
+}
+</style>

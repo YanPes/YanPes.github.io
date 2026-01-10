@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout>
+<Layout title="Yannik Peschke — Software Engineer & Writer" description="Personal website of Yannik Peschke. Writing about software architecture, microfrontends, and system design.">
 <section class="hero">
   <h1>Building scalable systems,<br>one component at a time.</h1>
   <p class="subtitle">Software Engineer & Technical Writer</p>
@@ -11,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
   Sharing insights from building distributed systems and modern web applications.
   </p>
   <div class="cta-buttons">
-    <a href="/blog.html" class="btn btn-primary">Read My Writing</a>
+    <a href="/blog" class="btn btn-primary">Read My Writing</a>
     <a href="https://github.com/YanPes" class="btn btn-secondary" target="_blank" rel="noopener">View GitHub</a>
   </div>
 </section>
@@ -79,14 +79,6 @@ import Layout from '../layouts/Layout.astro';
 .hero {
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg) 0;
-}
-
-.hero h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  margin-bottom: var(--spacing-sm);
-  letter-spacing: -0.03em;
 }
 
 .hero .subtitle {
@@ -219,40 +211,30 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 600;
   color: var(--text-primary);
 }
-</style>
 
-<script>
-  const themeToggle = document.querySelector('.theme-toggle');
-  const themeIcon = document.querySelector('.theme-icon');
-  const html = document.documentElement;
-
-  const currentTheme = localStorage.getItem('theme') || 'light';
-  html.setAttribute('data-theme', currentTheme);
-  if (themeIcon) {
-    themeIcon.textContent = currentTheme === 'dark' ? '☀' : '☾';
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        themeIcon.textContent = newTheme === 'dark' ? '☀' : '☾';
-      });
-    }
+@media (prefers-reduced-motion: no-preference) {
+  .article-card {
+    transition: transform 0.2s ease;
   }
 
+  .article-card:hover {
+    transform: translateX(4px);
+  }
+}
 
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('.nav-links a');
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--spacing-md) 0;
+  }
 
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (currentPath === href || (currentPath === '/' && href === '/')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-</script>
+  .cta-buttons {
+    width: 100%;
+  }
+
+  .btn {
+    flex: 1;
+    text-align: center;
+    min-width: 140px;
+  }
+}
+</style>

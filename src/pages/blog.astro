@@ -1,0 +1,284 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Blog — Yannik Peschke" 
+  description="Articles about software architecture, microfrontends, and system design by Yannik Peschke."
+>
+
+<h1>Writing</h1>
+<p class="page-intro">
+  Thoughts on software architecture, microfrontends, system design, and lessons learned from building production systems.
+</p>
+
+<div class="filter-tags">
+  <button class="tag active" data-filter="all">All Articles</button>
+  <button class="tag" data-filter="architecture">Architecture</button>
+  <button class="tag" data-filter="microfrontends">Microfrontends</button>
+  <button class="tag" data-filter="system-design">System Design</button>
+</div>
+
+<div class="articles-list">
+  <article class="article-card" data-tags="microfrontends,architecture">
+    <div class="article-meta">January 15, 2026 · 8 min read</div>
+    <h2>Module Federation in Practice: Lessons from Production</h2>
+    <div class="article-tags">
+      <span class="article-tag">Microfrontends</span>
+      <span class="article-tag">Architecture</span>
+    </div>
+    <p class="article-excerpt">
+      After implementing module federation across multiple teams, I've learned what works and what doesn't. 
+      This article covers the patterns that emerged from real-world usage, including shared dependencies, 
+      versioning strategies, and handling breaking changes in distributed systems.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="microfrontends,architecture,system-design">
+    <div class="article-meta">December 28, 2025 · 12 min read</div>
+    <h2>The State of Microfrontends: Architecture Patterns That Scale</h2>
+    <div class="article-tags">
+      <span class="article-tag">Microfrontends</span>
+      <span class="article-tag">Architecture</span>
+      <span class="article-tag">System Design</span>
+    </div>
+    <p class="article-excerpt">
+      A comprehensive deep dive into microfrontend architectures. We'll compare build-time integration, 
+      runtime composition, and edge-side includes, examining when each approach makes sense. Includes 
+      real-world performance data and team organization considerations.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="system-design,architecture">
+    <div class="article-meta">November 20, 2025 · 6 min read</div>
+    <h2>System Design Principles: Composability Over Complexity</h2>
+    <div class="article-tags">
+      <span class="article-tag">System Design</span>
+      <span class="article-tag">Architecture</span>
+    </div>
+    <p class="article-excerpt">
+      Why breaking systems into composable pieces leads to more maintainable architectures. This article 
+      explores how to identify the right boundaries, balance coupling and cohesion, and design systems 
+      that can evolve without complete rewrites.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="architecture">
+    <div class="article-meta">October 12, 2025 · 10 min read</div>
+    <h2>Frontend Architecture: Beyond Components</h2>
+    <div class="article-tags">
+      <span class="article-tag">Architecture</span>
+    </div>
+    <p class="article-excerpt">
+      Component libraries are just the beginning. This article discusses state management strategies, 
+      data fetching patterns, error boundaries, and how to structure frontend applications for long-term 
+      maintainability. Focus on practical patterns rather than framework-specific solutions.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="microfrontends,system-design">
+    <div class="article-meta">September 5, 2025 · 9 min read</div>
+    <h2>Shared State in Microfrontends: Patterns and Pitfalls</h2>
+    <div class="article-tags">
+      <span class="article-tag">Microfrontends</span>
+      <span class="article-tag">System Design</span>
+    </div>
+    <p class="article-excerpt">
+      Managing shared state across independently deployed microfrontends is challenging. We'll explore 
+      different approaches: custom events, shared stores, URL-based state, and when to use each. 
+      Includes code examples and performance considerations.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="architecture,system-design">
+    <div class="article-meta">August 18, 2025 · 7 min read</div>
+    <h2>API Design: Making Breaking Changes Without Breaking Things</h2>
+    <div class="article-tags">
+      <span class="article-tag">Architecture</span>
+      <span class="article-tag">System Design</span>
+    </div>
+    <p class="article-excerpt">
+      How to evolve APIs in production without breaking existing clients. Covers versioning strategies, 
+      deprecation patterns, and techniques for graceful migrations. Real examples from managing APIs 
+      across multiple teams and services.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="system-design">
+    <div class="article-meta">July 22, 2025 · 11 min read</div>
+    <h2>Building for Scale: Lessons from Growing Systems</h2>
+    <div class="article-tags">
+      <span class="article-tag">System Design</span>
+    </div>
+    <p class="article-excerpt">
+      What happens when your system needs to handle 10x the traffic? This article shares lessons learned 
+      from scaling web applications, including caching strategies, database optimization, and identifying 
+      bottlenecks before they become problems.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+
+  <article class="article-card" data-tags="architecture">
+    <div class="article-meta">June 14, 2025 · 5 min read</div>
+    <h2>The Cost of Abstraction: When to Abstract and When to Repeat</h2>
+    <div class="article-tags">
+      <span class="article-tag">Architecture</span>
+    </div>
+    <p class="article-excerpt">
+      Not every duplication needs an abstraction. This short article discusses the trade-offs between 
+      DRY principles and premature abstraction, and how to decide when it's worth creating shared code 
+      versus accepting some repetition.
+    </p>
+    <span class="read-more">Read article →</span>
+  </article>
+</div>
+
+</Layout>
+
+<style>
+.page-intro {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.filter-tags {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-sans);
+}
+
+.tag {
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.tag:hover, .tag.active {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border-color: var(--accent);
+}
+
+.articles-list {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.article-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.article-card:last-child {
+  border-bottom: none;
+}
+
+.article-card:hover {
+  transform: translateX(4px);
+}
+
+.article-meta {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-card h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.article-card:hover h2 {
+  color: var(--text-secondary);
+}
+
+.article-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.article-tag {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+.article-excerpt {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.read-more {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-top: var(--spacing-sm);
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .article-card {
+    transition: transform 0.2s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+</style>
+
+<script>
+  // Filter functionality
+  const filterTags = document.querySelectorAll('.tag');
+  const articles = document.querySelectorAll('.article-card');
+
+  filterTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const filter = tag.getAttribute('data-filter');
+      
+      filterTags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+
+      articles.forEach(article => {
+        const tags = article.getAttribute('data-tags');
+        
+        if (filter === 'all' || tags.includes(filter)) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
