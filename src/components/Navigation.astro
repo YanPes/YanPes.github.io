@@ -39,6 +39,19 @@ nav {
   letter-spacing: -0.05em;
   text-transform: uppercase;
   border-bottom: none;
+  position: relative;
+}
+
+.logo::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .logo:hover {

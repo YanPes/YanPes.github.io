@@ -56,21 +56,6 @@ import Layout from '../layouts/Layout.astro';
       My work centers on frontend architecture, microfrontends, and creating maintainable codebases 
       that teams can evolve over time. I believe in sharing knowledge and learning in public.
     </p>
-
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-label">Focus Areas</div>
-        <div class="stat-value">Architecture, Microfrontends</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Location</div>
-        <div class="stat-value">Schwäbisch Gmünd, DE</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Currently</div>
-        <div class="stat-value">Building & Writing</div>
-      </div>
-    </div>
   </div>
 </section>
 </Layout>
@@ -228,41 +213,6 @@ import Layout from '../layouts/Layout.astro';
   font-size: 1.125rem;
   line-height: 1.7;
   color: var(--text-secondary);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
-}
-
-.stat-item {
-  padding: var(--spacing-md);
-  background: transparent;
-  border: 1px dashed var(--border-color);
-  transition: all 0.2s ease;
-}
-
-.stat-item:hover {
-  border-style: solid;
-  border-color: var(--accent);
-  background: rgba(192, 254, 4, 0.05);
-}
-
-.stat-label {
-  font-family: var(--font-main);
-  font-size: 12px;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-bottom: var(--spacing-xs);
-  letter-spacing: 0.05em;
-}
-
-.stat-value {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
