@@ -24,7 +24,7 @@ const {
 		<meta name="description" content={description} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
 	</head>
   <body>
     <Header />
@@ -37,17 +37,17 @@ const {
 
 <style>
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  --border-color: #e5e5e5;
-  --accent: #1a1a1a;
-  --accent-hover: #333333;
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-tertiary: #888888;
+  --border-color: #333333;
+  --accent: rgb(192, 254, 4);
+  --accent-secondary: #ffffff;
+  --accent-hover: rgba(192, 254, 4, 0.8);
 
-  --font-serif: Georgia, "Times New Roman", Times, serif;
-  --font-sans: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --font-main: "JetBrains Mono", monospace;
 
   --container-max: 720px;
   --spacing-xs: 0.5rem;
@@ -57,17 +57,6 @@ const {
   --spacing-xl: 4rem;
 }
 
-[data-theme="dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #121212;
-  --text-primary: #e5e5e5;
-  --text-secondary: #a0a0a0;
-  --text-tertiary: #666666;
-  --border-color: #2a2a2a;
-  --accent: #e5e5e5;
-  --accent-hover: #ffffff;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -75,9 +64,9 @@ const {
 }
 
 body {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  line-height: 1.7;
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -95,30 +84,62 @@ section {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
   line-height: 1.1;
-  margin-bottom: var(--spacing-sm);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
+  color: var(--accent);
+  text-transform: uppercase;
 }
 
-h2 {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 400;
-  margin-bottom: var(--spacing-md);
+h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
   letter-spacing: -0.02em;
 }
 
-h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-xs);
-  letter-spacing: -0.01em;
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: all 0.2s ease;
 }
 
-p {
-  margin-bottom: var(--spacing-md);
-  font-size: 1.125rem;
+a:hover {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+code {
+  font-family: var(--font-main);
+  background: var(--bg-secondary);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+pre {
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: var(--spacing-md) 0;
+}
+
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
 }
 
 @media (max-width: 768px) {
@@ -132,30 +153,3 @@ p {
   }
 }
 </style>
-
-<script>
-  // Theme toggle functionality
-  const themeToggle = document.querySelector('.theme-toggle');
-  const themeIcon = document.querySelector('.theme-icon');
-  const html = document.documentElement;
-
-  // Check for saved theme preference or default to light
-  const currentTheme = localStorage.getItem('theme') || 'light';
-  html.setAttribute('data-theme', currentTheme);
-  if (themeIcon) {
-    themeIcon.textContent = currentTheme === 'dark' ? '☀' : '☾';
-  }
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      if (themeIcon) {
-        themeIcon.textContent = newTheme === 'dark' ? '☀' : '☾';
-      }
-    });
-  }
-</script>

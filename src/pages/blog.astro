@@ -153,51 +153,62 @@ import Layout from '../layouts/Layout.astro';
   gap: var(--spacing-sm);
   flex-wrap: wrap;
   margin-bottom: var(--spacing-lg);
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
 }
 
 .tag {
   padding: 0.5rem 1rem;
-  font-size: 14px;
-  background-color: var(--bg-secondary);
+  font-size: 12px;
+  background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 .tag:hover, .tag.active {
   background-color: var(--accent);
   color: var(--bg-primary);
   border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(192, 254, 4, 0.4);
 }
 
 .articles-list {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .article-card {
   text-decoration: none;
   color: inherit;
   display: block;
-  padding-bottom: var(--spacing-lg);
-  border-bottom: 1px solid var(--border-color);
-  transition: transform 0.2s ease;
-}
-
-.article-card:last-child {
-  border-bottom: none;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
 }
 
 .article-card:hover {
-  transform: translateX(4px);
+  border-color: var(--accent);
+  transform: translateX(5px);
+  box-shadow: -5px 5px 0 rgba(192, 254, 4, 0.1);
+}
+
+.article-card:last-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.article-card:last-child:hover {
+  border-bottom: 1px solid var(--accent);
 }
 
 .article-meta {
-  font-family: var(--font-sans);
-  font-size: 14px;
+  font-family: var(--font-main);
+  font-size: 12px;
   color: var(--text-tertiary);
   margin-bottom: var(--spacing-xs);
   text-transform: uppercase;
@@ -206,14 +217,15 @@ import Layout from '../layouts/Layout.astro';
 
 .article-card h2 {
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: var(--spacing-xs);
   letter-spacing: -0.02em;
   transition: color 0.2s ease;
+  color: var(--text-primary);
 }
 
 .article-card:hover h2 {
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 
 .article-tags {
@@ -223,32 +235,30 @@ import Layout from '../layouts/Layout.astro';
 }
 
 .article-tag {
-  font-family: var(--font-sans);
-  font-size: 12px;
+  font-family: var(--font-main);
+  font-size: 11px;
   padding: 0.25rem 0.5rem;
-  background-color: var(--bg-secondary);
+  background-color: transparent;
   color: var(--text-tertiary);
   border: 1px solid var(--border-color);
+  text-transform: uppercase;
 }
 
 .article-excerpt {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .read-more {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  color: var(--accent);
   margin-top: var(--spacing-sm);
   display: inline-block;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .article-card {
-    transition: transform 0.2s ease;
-  }
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {

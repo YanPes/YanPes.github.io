@@ -248,19 +248,33 @@ import Layout from '../layouts/Layout.astro';
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: var(--spacing-md);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.tool-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
+  transform: translateX(5px);
 }
 
 .tool-item:last-child {
-  border-bottom: none;
+  border: 1px solid var(--border-color);
+}
+
+.tool-item:last-child:hover {
+  border-color: var(--accent);
 }
 
 .tool-name {
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 1.125rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .tool-description {
@@ -275,16 +289,29 @@ import Layout from '../layouts/Layout.astro';
 }
 
 .simple-list-item {
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.simple-list-item:hover {
+  border-color: var(--accent);
+  transform: translateX(5px);
+  box-shadow: -5px 5px 0 rgba(192, 254, 4, 0.1);
 }
 
 .simple-list-item strong {
-  font-family: var(--font-sans);
-  font-weight: 500;
+  font-family: var(--font-main);
+  font-weight: 700;
   color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.simple-list-item:hover strong {
+  color: var(--accent);
 }
 
 .simple-list-item span {

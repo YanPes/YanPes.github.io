@@ -169,14 +169,16 @@ import Layout from '../layouts/Layout.astro';
 }
 
 .experience-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 1.125rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .experience-period {
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 14px;
   color: var(--text-tertiary);
   text-transform: uppercase;
@@ -200,15 +202,17 @@ import Layout from '../layouts/Layout.astro';
   padding: var(--spacing-md);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.skill-category:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
 }
 
 .skill-category h3 {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-tertiary);
+  margin-top: 0;
+  font-size: 1.125rem;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -278,18 +282,22 @@ import Layout from '../layouts/Layout.astro';
 }
 
 .contact-link {
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   color: var(--text-primary);
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .contact-link:hover {
-  background-color: var(--accent);
-  color: var(--bg-primary);
+  background-color: transparent;
+  color: var(--accent);
   border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.2);
 }
 
 h2:first-of-type {

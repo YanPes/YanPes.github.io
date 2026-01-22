@@ -24,24 +24,28 @@ footer {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.social-links {
-  display: flex;
-  gap: var(--spacing-md);
-  list-style: none;
-}
-
-.social-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.social-links a:hover {
-  color: var(--text-primary);
-}
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+  }
+  
+  .social-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .social-links a:hover {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: none;
+    text-shadow: 0 0 8px rgba(192, 254, 4, 0.4);
+  }
 </style>

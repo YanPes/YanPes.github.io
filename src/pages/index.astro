@@ -79,80 +79,102 @@ import Layout from '../layouts/Layout.astro';
 .hero {
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .hero .subtitle {
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--text-secondary);
-  font-weight: 300;
+  color: var(--accent);
+  font-weight: 400;
   margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .hero .description {
   font-size: 1.125rem;
   max-width: 600px;
   margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
 }
 
 .cta-buttons {
   display: flex;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
 }
 
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 700;
   transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .btn-primary {
   background-color: var(--accent);
   color: var(--bg-primary);
-  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.2);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: transparent;
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(192, 254, 4, 0.4);
 }
 
 .btn-secondary {
   background-color: transparent;
   color: var(--text-primary);
+  border-color: var(--text-primary);
 }
 
 .btn-secondary:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 
 .blog-preview {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .article-card {
   text-decoration: none;
   color: inherit;
   display: block;
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.article-card:hover {
+  border-color: var(--accent);
+  transform: translateX(5px);
+  box-shadow: -5px 5px 0 rgba(192, 254, 4, 0.1);
 }
 
 .article-card:last-child {
-  border-bottom: none;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.article-card:last-child:hover {
+  border-bottom: 1px solid var(--accent);
 }
 
 .article-meta {
-  font-family: var(--font-sans);
-  font-size: 14px;
+  font-family: var(--font-main);
+  font-size: 12px;
   color: var(--text-tertiary);
   margin-bottom: var(--spacing-xs);
   text-transform: uppercase;
@@ -162,14 +184,15 @@ import Layout from '../layouts/Layout.astro';
 .article-card h3 {
   transition: color 0.2s ease;
   margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
 }
 
 .article-card:hover h3 {
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 
 .article-excerpt {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -182,6 +205,7 @@ import Layout from '../layouts/Layout.astro';
 .bio {
   font-size: 1.125rem;
   line-height: 1.7;
+  color: var(--text-secondary);
 }
 
 .stats-grid {
@@ -195,31 +219,27 @@ import Layout from '../layouts/Layout.astro';
   padding: var(--spacing-md);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.stat-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
 }
 
 .stat-label {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--text-tertiary);
+  font-family: var(--font-main);
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
   margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.05em;
 }
 
 .stat-value {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--text-primary);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .article-card {
-    transition: transform 0.2s ease;
-  }
-
-  .article-card:hover {
-    transform: translateX(4px);
-  }
 }
 
 @media (max-width: 768px) {
