@@ -200,20 +200,38 @@ import Layout from '../layouts/Layout.astro';
 
 .skill-category {
   padding: var(--spacing-md);
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  padding-left: var(--spacing-lg);
+  background-color: transparent;
+  border-left: 1px solid var(--border-color);
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .skill-category:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
 }
 
 .skill-category h3 {
   margin-top: 0;
   font-size: 1.125rem;
   margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+}
+
+.skill-category h3::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.skill-category:hover h3::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .skill-list {
@@ -238,13 +256,24 @@ import Layout from '../layouts/Layout.astro';
   padding: var(--spacing-xs) 0;
   position: relative;
   padding-left: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.balance-list li:hover {
+  color: var(--text-primary);
+  transform: translateX(5px);
 }
 
 .balance-list li::before {
-  content: "•";
+  content: "*";
   position: absolute;
   left: 0;
   color: var(--text-tertiary);
+  font-family: var(--font-main);
+}
+
+.balance-list li:hover::before {
+  color: var(--accent);
 }
 
 .tool-list {

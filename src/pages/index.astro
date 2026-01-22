@@ -116,30 +116,35 @@ import Layout from '../layouts/Layout.astro';
   border: 1px solid var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  position: relative;
 }
 
 .btn-primary {
-  background-color: var(--accent);
-  color: var(--bg-primary);
-  box-shadow: 0 0 15px rgba(192, 254, 4, 0.2);
+  background-color: transparent;
+  color: var(--accent);
+  box-shadow: none;
 }
 
 .btn-primary:hover {
-  background-color: transparent;
-  color: var(--accent);
+  background-color: var(--accent);
+  color: var(--bg-primary);
   box-shadow: 0 0 20px rgba(192, 254, 4, 0.4);
+}
+
+.btn-primary::before {
+  content: "> ";
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--text-primary);
-  border-color: var(--text-primary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
 }
 
 .btn-secondary:hover {
-  background-color: var(--text-primary);
-  color: var(--bg-primary);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  box-shadow: none;
 }
 
 
@@ -153,23 +158,24 @@ import Layout from '../layouts/Layout.astro';
   color: inherit;
   display: block;
   padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  padding-left: var(--spacing-lg);
+  border-left: 1px solid var(--border-color);
+  background: transparent;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .article-card:hover {
-  border-color: var(--accent);
-  transform: translateX(5px);
-  box-shadow: -5px 5px 0 rgba(192, 254, 4, 0.1);
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
 }
 
 .article-card:last-child {
-  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
 }
 
 .article-card:last-child:hover {
-  border-bottom: 1px solid var(--accent);
+  border-left-color: var(--accent);
 }
 
 .article-meta {
@@ -185,6 +191,22 @@ import Layout from '../layouts/Layout.astro';
   transition: color 0.2s ease;
   margin-bottom: var(--spacing-xs);
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.article-card h3::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.article-card:hover h3::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .article-card:hover h3 {
@@ -217,14 +239,15 @@ import Layout from '../layouts/Layout.astro';
 
 .stat-item {
   padding: var(--spacing-md);
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: transparent;
+  border: 1px dashed var(--border-color);
   transition: all 0.2s ease;
 }
 
 .stat-item:hover {
+  border-style: solid;
   border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
+  background: rgba(192, 254, 4, 0.05);
 }
 
 .stat-label {

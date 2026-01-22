@@ -249,23 +249,24 @@ import Layout from '../layouts/Layout.astro';
   grid-template-columns: 200px 1fr;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  padding-left: var(--spacing-lg);
+  border-left: 1px solid var(--border-color);
+  background: transparent;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .tool-item:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(192, 254, 4, 0.1);
-  transform: translateX(5px);
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
 }
 
 .tool-item:last-child {
-  border: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
 }
 
 .tool-item:last-child:hover {
-  border-color: var(--accent);
+  border-left-color: var(--accent);
 }
 
 .tool-name {
@@ -275,6 +276,22 @@ import Layout from '../layouts/Layout.astro';
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+}
+
+.tool-name::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.tool-item:hover .tool-name::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .tool-description {
@@ -290,16 +307,17 @@ import Layout from '../layouts/Layout.astro';
 
 .simple-list-item {
   padding: var(--spacing-md);
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  padding-left: var(--spacing-lg);
+  background-color: transparent;
+  border-left: 1px solid var(--border-color);
   font-size: 1rem;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .simple-list-item:hover {
-  border-color: var(--accent);
-  transform: translateX(5px);
-  box-shadow: -5px 5px 0 rgba(192, 254, 4, 0.1);
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
 }
 
 .simple-list-item strong {
@@ -308,6 +326,22 @@ import Layout from '../layouts/Layout.astro';
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.simple-list-item strong::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.simple-list-item:hover strong::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .simple-list-item:hover strong {
