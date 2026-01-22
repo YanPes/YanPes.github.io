@@ -1,0 +1,126 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  readTime: string;
+  tags?: string[];
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { title, date, readTime, tags = [], headingLevel = 'h2' } = Astro.props;
+
+const Heading = headingLevel;
+// Convert tags to lowercase hyphenated strings for data attribute
+const dataTags = tags.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(',');
+---
+
+<article class="article-card" data-tags={dataTags}>
+  <div class="article-meta">{date} · {readTime}</div>
+  <Heading>{title}</Heading>
+  {tags.length > 0 && (
+    <div class="article-tags">
+      {tags.map(tag => <span class="article-tag">{tag}</span>)}
+    </div>
+  )}
+  <span class="read-more">Read article →</span>
+</article>
+
+<style>
+  .article-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+    border-left: 1px solid var(--border-color);
+    background: transparent;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .article-card:hover {
+    border-left-color: var(--accent);
+    padding-left: calc(var(--spacing-lg) + 10px);
+  }
+
+  .article-card:last-child {
+    border-left: 1px solid var(--border-color);
+  }
+
+  .article-card:last-child:hover {
+    border-left-color: var(--accent);
+  }
+
+  .article-meta {
+    font-family: var(--font-main);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Heading Styles */
+  .article-card :global(h2), .article-card :global(h3) {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -0.02em;
+    transition: color 0.2s ease;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+  }
+
+  .article-card :global(h2) {
+    font-size: 1.75rem;
+  }
+
+  .article-card :global(h3) {
+    font-size: 1.5rem; /* Slightly smaller for h3 */
+  }
+
+  .article-card :global(h2)::before, .article-card :global(h3)::before {
+    content: ">";
+    margin-right: 10px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.2s ease;
+  }
+
+  .article-card:hover :global(h2)::before, .article-card:hover :global(h3)::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .article-card:hover :global(h2), .article-card:hover :global(h3) {
+    color: var(--accent);
+  }
+
+  .article-tags {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .article-tag {
+    font-family: var(--font-main);
+    font-size: 11px;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border-color);
+    text-transform: uppercase;
+  }
+
+  .read-more {
+    font-family: var(--font-main);
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: var(--spacing-sm);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+</style>
