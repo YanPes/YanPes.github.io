@@ -83,13 +83,19 @@ section {
   margin-bottom: var(--spacing-xl);
 }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+:global(h1) {
+  font-size: clamp(2.0rem, 5vw, 2.5rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.05em;
-  color: var(--accent);
   text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+}
+
+:global(h2::before) {
+    content: "_";
+    margin-right: 4px;
+    color: var(--accent);
 }
 
 h2, h3, h4, h5, h6 {
