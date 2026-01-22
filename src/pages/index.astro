@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+<section class="hero">
+  <h1>Building scalable systems,<br>one component at a time.</h1>
+  <p class="subtitle">Frontend Architect | Advocate for Module Federation & Rspack Ecosystem | Micro Frontends & Tooling</p>
+  <p class="description">
+  I write about software architecture, microfrontends, and system design. 
+  Sharing insights from building distributed systems and modern web applications.
+  </p>
+  <div class="cta-buttons">
+    <a href="/blog" class="btn btn-primary">Read My Writing</a>
+    <a href="https://github.com/YanPes" class="btn btn-secondary" target="_blank" rel="noopener">View GitHub</a>
+  </div>
+</section>
+
+<section>
+  <h2>Recent Articles</h2>
+  <div class="blog-preview">
+    <article class="article-card">
+      <div class="article-meta">January 2026 · 8 min read</div>
+      <h3>Module Federation in Practice: Lessons from Production</h3>
+      <p class="article-excerpt">
+        After implementing module federation across multiple teams, I've learned what works 
+        and what doesn't. Here are the patterns that emerged from real-world usage.
+      </p>
+    </article>
+
+    <article class="article-card">
+      <div class="article-meta">December 2025 · 12 min read</div>
+      <h3>The State of Microfrontends: Architecture Patterns That Scale</h3>
+      <p class="article-excerpt">
+        A deep dive into microfrontend architectures, comparing build-time integration, 
+        runtime composition, and edge-side includes for different use cases.
+      </p>
+    </article>
+
+    <article class="article-card">
+      <div class="article-meta">November 2025 · 6 min read</div>
+      <h3>System Design Principles: Composability Over Complexity</h3>
+      <p class="article-excerpt">
+        Why breaking systems into composable pieces leads to more maintainable architectures, 
+        and how to identify the right boundaries.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>About Me</h2>
+  <div class="about-grid">
+    <p class="bio">
+      I'm a software engineer focused on building scalable web applications and distributed systems. 
+      My work centers on frontend architecture, microfrontends, and creating maintainable codebases 
+      that teams can evolve over time. I believe in sharing knowledge and learning in public.
+    </p>
+  </div>
+</section>
+</Layout>
+
+<style>
+.hero {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero .subtitle {
+  font-family: var(--font-main);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero .description {
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  font-family: var(--font-main);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  border: 1px solid var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.btn-primary {
+  background-color: transparent;
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px rgba(192, 254, 4, 0.4);
+}
+
+.btn-primary::before {
+  content: "> ";
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+
+.blog-preview {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.article-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  border-left: 1px solid var(--border-color);
+  background: transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.article-card:hover {
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
+}
+
+.article-card:last-child {
+  border-left: 1px solid var(--border-color);
+}
+
+.article-card:last-child:hover {
+  border-left-color: var(--accent);
+}
+
+.article-meta {
+  font-family: var(--font-main);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-card h3 {
+  transition: color 0.2s ease;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.article-card h3::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.article-card:hover h3::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.article-card:hover h3 {
+  color: var(--accent);
+}
+
+.article-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.about-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.bio {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--spacing-md) 0;
+  }
+
+  .cta-buttons {
+    width: 100%;
+  }
+
+  .btn {
+    flex: 1;
+    text-align: center;
+    min-width: 140px;
+  }
+}
+</style>

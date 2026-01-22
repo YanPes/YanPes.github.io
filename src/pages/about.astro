@@ -1,0 +1,345 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="About — Yannik Peschke" 
+  description="Learn more about Yannik Peschke, Frontend Software Architect specializing in micro-frontend architectures and the Rspack ecosystem."
+>
+
+<h1>About Me</h1>
+
+<p class="intro">
+  I'm a Frontend Software Architect who thrives on building scalable web ecosystems. My professional journey is focused on decoupling large-scale systems and fostering collaboration among development teams.
+</p>
+
+<p>
+  Outside of work, you'll find me trading code for mountain trails and good books, always seeking new ways to learn and grow.
+</p>
+
+<h2>Work & Expertise</h2>
+
+<p>
+  As a Frontend Software Architect at Festo, I focus on transforming complex, monolithic web systems into dynamic, interconnected micro-frontend architectures. My main responsibility is the technical orchestration of frontends, enabling decentralized teams to work efficiently on a shared customer journey. In this role, I ensure our systems are performant, secure, resilient, and communicate seamlessly. I also own onboarding and governance documents and serve as a technical mentor and consultant for developers, stakeholders, and design teams.
+</p>
+
+<h2>Off-Screen Balance</h2>
+
+<p>
+  To maintain my productivity and mental balance, I enjoy spending my free time away from the screen:
+</p>
+
+<ul class="balance-list">
+  <li>Trail running & hiking in the mountains</li>
+  <li>Alpine skiing</li>
+  <li>Reading & cooking</li>
+  <li>Exploring nature and other cultures with my girlfriend</li>
+</ul>
+
+<p>
+  When I do find time for private coding, it's usually for research or tinkering with my Neovim configuration.
+</p>
+
+<h2>Languages & Libraries</h2>
+
+<div class="skills-grid">
+  <div class="skill-category">
+    <h3>Classic Frontend</h3>
+    <p class="skill-list">
+      Yes, I learned frontend when jQuery was the GOAT! Having a solid foundation on classic technology without abstraction layers is mandatory to actually understand any advanced framework or toolkit (looking at you React and Tailwind).
+    </p>
+    <p class="skill-list">
+      HTML5, Handlebars, CSS3, Sass, Javascript, jQuery, NodeJs
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Modern Frontend</h3>
+    <p class="skill-list">
+      Advanced tools I work with for modern web application development with a focus on first level citizen products for micro frontend architectures.
+    </p>
+    <p class="skill-list">
+      TypeScript, React, ModernJs, Rsbuild, Rslib, Rspress, Playwrite, Rstest, ModuleFederation
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Bundler</h3>
+    <p class="skill-list">
+      It is my daily business to adapt, maintain and modernize/migrate bundlers to keep pipeline performance, frontend infrastructure and developer experience on a peak level. This also includes writing custom Rspack plugins (Rust bundler following the amazing API architecture philosophy of Webpack).
+    </p>
+    <p class="skill-list">
+      Rspack, Webpack, Gulp, Bower, Grunt
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Infra</h3>
+    <p class="skill-list">
+      I am not a DevOps specialist but I am familiar configuring my own docker-compose files, gitlab pipelines and reverse-proxy rules on my own.
+    </p>
+    <p class="skill-list">
+      Gitlab, Docker, Kubernetes, Traefik
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Generic</h3>
+    <p class="skill-list">
+      Additional tech I like to use to keep the work rolling.
+    </p>
+    <p class="skill-list">
+      OAuth, OpenApi, Lua, Neovim, SonarQube, Bash, Git
+    </p>
+  </div>
+</div>
+
+<h2>My Dev Setup</h2>
+
+<p>
+  I'm a strong believer in a highly customized and efficient development environment. My setup is built around a few key tools that help me stay productive and focused.
+</p>
+
+<div class="skills-grid">
+  <div class="skill-category">
+    <h3>Operating System</h3>
+    <p class="skill-list">
+      My go-to setup is Arch Linux paired with Hyprland, a dynamic tiling Wayland compositor, to manage my windows and workspaces with ease. Unfortunately, I am bound to a Windows machine at work trying by best to be friends with WSL 🙈
+    </p>
+  </div>
+
+  <div class="skill-category">
+    <h3>Core Tools</h3>
+    <ul class="tool-list">
+      <li><strong>Neovim:</strong> My custom-built Neovim configuration is the heart of my coding workflow. It's a lightweight, powerful, and keyboard-centric editor tailored to my needs.</li>
+      <li><strong>IdeaVim:</strong> For my work with JetBrains IDEs like IntelliJ, I use the IdeaVim plugin. This allows me to replicate my efficient, keyboard-driven Neovim experience within a more feature-rich environment, ensuring a consistent workflow.</li>
+      <li><strong>Tmux:</strong> I use Tmux to manage multiple terminal sessions and windows from a single screen. This lets me handle different tasks—from running tests to monitoring logs—without ever leaving my terminal.</li>
+      <li><strong>Lazygit & LazyDocker:</strong> To interact with Git and Docker in a fast and intuitive way, I rely on these two tools. They provide a simple, terminal-based user interface that makes complex tasks quick and effortless.</li>
+    </ul>
+    <p class="skill-list" style="margin-top: var(--spacing-sm);">
+      My entire setup is designed to be fast, keyboard-driven, and distraction-free, allowing me to fully immerse myself in the code.
+    </p>
+  </div>
+</div>
+
+<div class="contact-section">
+  <h2 style="margin-top: 0;">Get in Touch</h2>
+  <p>
+    I'm always interested in connecting with other engineers, discussing architecture patterns, 
+    or exploring collaboration opportunities.
+  </p>
+  <div class="contact-links">
+    <a href="https://github.com/YanPes" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+    <a href="mailto:contact@yannikpeschke.dev" class="contact-link">Email</a>
+    <a href="https://linkedin.com/in/yannikpeschke" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
+
+</Layout>
+
+<style>
+.intro {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.experience-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.experience-item {
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.experience-item:last-child {
+  border-bottom: none;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.experience-title {
+  font-family: var(--font-main);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.experience-period {
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.experience-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.skill-category {
+  padding: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  background-color: transparent;
+  border-left: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.skill-category:hover {
+  border-left-color: var(--accent);
+  padding-left: calc(var(--spacing-lg) + 10px);
+}
+
+.skill-category h3 {
+  margin-top: 0;
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+}
+
+.skill-category h3::before {
+  content: ">";
+  margin-right: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.skill-category:hover h3::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.skill-list {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-sm);
+}
+
+.skill-list:last-of-type {
+  margin-bottom: 0;
+}
+
+.balance-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+  color: var(--text-secondary);
+}
+
+.balance-list li {
+  padding: var(--spacing-xs) 0;
+  position: relative;
+  padding-left: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.balance-list li:hover {
+  color: var(--text-primary);
+  transform: translateX(5px);
+}
+
+.balance-list li::before {
+  content: "*";
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+  font-family: var(--font-main);
+}
+
+.balance-list li:hover::before {
+  color: var(--accent);
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.tool-list li {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tool-list li:last-child {
+  margin-bottom: 0;
+}
+
+.tool-list strong {
+  color: var(--text-primary);
+}
+
+.contact-section {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.contact-links {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-md);
+}
+
+.contact-link {
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-link:hover {
+  background-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(192, 254, 4, 0.2);
+}
+
+h2:first-of-type {
+  margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-header {
+    flex-direction: column;
+  }
+}
+</style>

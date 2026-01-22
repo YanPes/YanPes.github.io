@@ -1,0 +1,51 @@
+ <footer>
+   <div class="footer-content">
+     <p>&copy; 2026 Yannik Peschke. All rights reserved.</p>
+     <ul class="social-links">
+       <li><a href="https://github.com/YanPes" target="_blank" rel="noopener">GitHub</a></li>
+       <li><a href="mailto:contact@yannikpeschke.dev">Email</a></li>
+       <li><a href="/feed.xml">RSS</a></li>
+     </ul>
+   </div>
+ </footer>
+
+<style>
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-lg) var(--spacing-sm);
+  margin-top: var(--spacing-xl);
+}
+
+.footer-content {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+  }
+  
+  .social-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .social-links a:hover {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: none;
+    text-shadow: 0 0 8px rgba(192, 254, 4, 0.4);
+  }
+</style>
