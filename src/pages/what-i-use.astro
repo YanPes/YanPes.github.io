@@ -14,216 +14,128 @@ import Layout from '../layouts/Layout.astro';
 </p>
 
 <section class="category-section">
-  <h2>Languages & Frameworks</h2>
-  <div class="tools-grid">
-    <div class="tool-item">
-      <div class="tool-name">TypeScript</div>
-      <div class="tool-description">
-        Primary language for frontend and backend work. The type system catches bugs early and makes 
-        refactoring safer, especially in large codebases.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">React</div>
-      <div class="tool-description">
-        Main frontend framework. Component-based architecture works well for both small applications 
-        and large-scale microfrontend systems.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Node.js</div>
-      <div class="tool-description">
-        Backend runtime for APIs and tooling. Sharing TypeScript across frontend and backend reduces 
-        context switching and enables code sharing.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Next.js</div>
-      <div class="tool-description">
-        For server-rendered React applications. Good balance of features, performance, and developer 
-        experience for full-stack applications.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Build & Development Tools</h2>
-  <div class="tools-grid">
-    <div class="tool-item">
-      <div class="tool-name">Webpack</div>
-      <div class="tool-description">
-        Module bundler, especially for microfrontend architectures using Module Federation. Powerful 
-        but requires configuration expertise.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Vite</div>
-      <div class="tool-description">
-        Fast build tool for modern web projects. Great developer experience with instant HMR. Used 
-        for greenfield projects and prototypes.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">pnpm</div>
-      <div class="tool-description">
-        Package manager that's faster and more efficient than npm. Works well in monorepos with 
-        workspace support.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">ESLint & Prettier</div>
-      <div class="tool-description">
-        Code quality and formatting. ESLint catches potential bugs, Prettier keeps formatting consistent 
-        across the team.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Testing</h2>
+  <h2>Languages &amp; Tools</h2>
   <div class="simple-list">
     <div class="simple-list-item">
-      <strong>Vitest</strong> — <span>Fast unit testing framework, excellent TypeScript support</span>
+      <strong>Classic Frontend</strong>
+      <p class="category-intro">
+        Yes, I learned frontend when jQuery was the GOAT! Having a solid foundation on classic technology
+        without abstraction layers is mandatory to actually understand any advanced framework or toolkit
+        (looking at you React and Tailwind).
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">HTML5</span>
+        <span class="stack-tag">Handlebars</span>
+        <span class="stack-tag">CSS3</span>
+        <span class="stack-tag">Sass</span>
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">jQuery</span>
+        <span class="stack-tag">NodeJs</span>
+      </div>
     </div>
+
     <div class="simple-list-item">
-      <strong>React Testing Library</strong> — <span>Component testing focused on user behavior</span>
+      <strong>Modern Frontend</strong>
+      <p class="category-intro">
+        Advanced tools I work with for modern web application development with a focus on first level citizen
+        products for micro frontend architectures.
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">TypeScript</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">ModernJs</span>
+        <span class="stack-tag">Rsbuild</span>
+        <span class="stack-tag">Rslib</span>
+        <span class="stack-tag">Rspress</span>
+        <span class="stack-tag">Playwright</span>
+        <span class="stack-tag">Vitest</span>
+        <span class="stack-tag">ModuleFederation</span>
+        <span class="stack-tag">Nx</span>
+      </div>
     </div>
+
     <div class="simple-list-item">
-      <strong>Playwright</strong> — <span>End-to-end testing across browsers</span>
+      <strong>Bundler</strong>
+      <p class="category-intro">
+        It is my daily business to adapt, maintain and modernize/migrate bundlers to keep pipeline performance,
+        frontend infrastructure and developer experience on a peak level. This also includes writing custom
+        Rspack plugins (Rust bundler following the amazing API architecture philosophy of Webpack).
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">Rspack</span>
+        <span class="stack-tag">Webpack</span>
+        <span class="stack-tag">Gulp</span>
+        <span class="stack-tag">Bower</span>
+        <span class="stack-tag">Grunt</span>
+      </div>
     </div>
+
     <div class="simple-list-item">
-      <strong>MSW</strong> — <span>Mock Service Worker for API mocking in tests</span>
+      <strong>Infra</strong>
+      <p class="category-intro">
+        I am not a DevOps specialist but I am familiar configuring my own docker-compose files, gitlab pipelines
+        and reverse-proxy rules on my own.
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">Gitlab</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">Kubernetes</span>
+        <span class="stack-tag">Traefik</span>
+      </div>
+    </div>
+
+    <div class="simple-list-item">
+      <strong>Generic</strong>
+      <p class="category-intro">
+        Additional tech I like to use to keep the work rolling.
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">OAuth</span>
+        <span class="stack-tag">OpenApi</span>
+        <span class="stack-tag">Lua</span>
+        <span class="stack-tag">Neovim</span>
+        <span class="stack-tag">SonarQube</span>
+        <span class="stack-tag">Bash</span>
+        <span class="stack-tag">Git</span>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="category-section">
-  <h2>Infrastructure & DevOps</h2>
-  <div class="tools-grid">
-    <div class="tool-item">
-      <div class="tool-name">Docker</div>
-      <div class="tool-description">
-        Containerization for consistent development and deployment environments. Essential for 
-        microservices architectures.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">GitHub Actions</div>
-      <div class="tool-description">
-        CI/CD pipelines for automated testing and deployment. Tight integration with GitHub repositories 
-        makes setup straightforward.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Kubernetes</div>
-      <div class="tool-description">
-        Container orchestration for production deployments. Steep learning curve but powerful for 
-        managing distributed systems.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Databases & Data</h2>
+  <h2>My Dev Setup</h2>
+  <p class="category-intro category-intro-standalone">
+    I'm a strong believer in a highly customized and efficient development environment. My setup is built around a few key tools that help me stay productive and focused.
+  </p>
   <div class="simple-list">
     <div class="simple-list-item">
-      <strong>PostgreSQL</strong> — <span>Reliable relational database with excellent features</span>
+      <strong>Operating System</strong>
+      <p class="category-intro">
+        My go-to setup is Arch Linux paired with Hyprland, a dynamic tiling Wayland compositor, to manage my windows and workspaces with ease. Unfortunately, I am bound to a Windows machine at work trying my best to be friends with WSL 🙈
+      </p>
     </div>
     <div class="simple-list-item">
-      <strong>Redis</strong> — <span>Caching and session storage</span>
+      <strong>Neovim</strong>
+      <p class="category-intro">
+        My custom-built Neovim configuration is the heart of my coding workflow. It's a lightweight, powerful, and keyboard-centric editor tailored to my needs.
+      </p>
     </div>
     <div class="simple-list-item">
-      <strong>Prisma</strong> — <span>Type-safe database client and ORM for TypeScript</span>
+      <strong>Tmux</strong>
+      <p class="category-intro">
+        I use Tmux to manage multiple terminal sessions and windows from a single screen. This lets me handle different tasks—from running tests to monitoring logs—without ever leaving my terminal.
+      </p>
+    </div>
+    <div class="simple-list-item">
+      <strong>Lazygit & LazyDocker</strong>
+      <p class="category-intro">
+        To interact with Git and Docker in a fast and intuitive way, I rely on these two tools. They provide a simple, terminal-based user interface that makes complex tasks quick and effortless.
+      </p>
     </div>
   </div>
-</section>
-
-<section class="category-section">
-  <h2>Development Environment</h2>
-  <div class="tools-grid">
-    <div class="tool-item">
-      <div class="tool-name">VS Code</div>
-      <div class="tool-description">
-        Primary editor. Excellent TypeScript support, great extension ecosystem, and fast performance.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">iTerm2 + zsh</div>
-      <div class="tool-description">
-        Terminal setup with oh-my-zsh for improved command line experience. Customized with plugins 
-        for git, auto-suggestions, and syntax highlighting.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Git</div>
-      <div class="tool-description">
-        Version control. Using conventional commits for clear history and automated changelog generation.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Monitoring & Observability</h2>
-  <div class="simple-list">
-    <div class="simple-list-item">
-      <strong>Sentry</strong> — <span>Error tracking and performance monitoring</span>
-    </div>
-    <div class="simple-list-item">
-      <strong>Grafana</strong> — <span>Metrics visualization and dashboards</span>
-    </div>
-    <div class="simple-list-item">
-      <strong>Prometheus</strong> — <span>Metrics collection and alerting</span>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Design & Documentation</h2>
-  <div class="tools-grid">
-    <div class="tool-item">
-      <div class="tool-name">Figma</div>
-      <div class="tool-description">
-        Collaborative design tool. Great for working with designers and creating component libraries 
-        that match code implementations.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Storybook</div>
-      <div class="tool-description">
-        Component documentation and isolated development. Helps maintain consistent UI components 
-        across teams.
-      </div>
-    </div>
-    <div class="tool-item">
-      <div class="tool-name">Notion</div>
-      <div class="tool-description">
-        Documentation and knowledge management. Good for architectural decision records and 
-        team documentation.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section">
-  <h2>Learning & Staying Current</h2>
-  <div class="simple-list">
-    <div class="simple-list-item">
-      <strong>GitHub</strong> — <span>Following interesting repositories and reading source code</span>
-    </div>
-    <div class="simple-list-item">
-      <strong>RSS Reader</strong> — <span>Following engineering blogs and technical publications</span>
-    </div>
-    <div class="simple-list-item">
-      <strong>Technical Books</strong> — <span>Deep dives into fundamental concepts</span>
-    </div>
-    <div class="simple-list-item">
-      <strong>Conference Talks</strong> — <span>YouTube channels and conference recordings</span>
-    </div>
-  </div>
+  <p class="dev-setup-outro">
+    My entire setup is designed to be fast, keyboard-driven, and distraction-free, allowing me to fully immerse myself in the code.
+  </p>
 </section>
 
 </Layout>
@@ -326,13 +238,15 @@ import Layout from '../layouts/Layout.astro';
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  position: relative;
 }
 
 .simple-list-item strong::before {
   content: ">";
-  margin-right: 10px;
+  position: absolute;
+  left: -16px;
+  top: 0;
   color: var(--accent);
   opacity: 0;
   transform: translateX(-10px);
@@ -350,6 +264,53 @@ import Layout from '../layouts/Layout.astro';
 
 .simple-list-item span {
   color: var(--text-secondary);
+}
+
+.category-section h2 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.category-section h2:first-child {
+  margin-top: 0;
+}
+
+.category-intro {
+  margin: var(--spacing-xs) 0 var(--spacing-sm);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.category-intro-standalone {
+  margin-bottom: var(--spacing-lg);
+}
+
+.dev-setup-outro {
+  margin-top: var(--spacing-lg);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.stack-tag {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.simple-list-item:hover .stack-tag {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 @media (max-width: 768px) {
