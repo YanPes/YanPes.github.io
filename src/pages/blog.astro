@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Article from '../components/Article.astro';
+import { blogPosts } from '../data/blogPosts';
 ---
 
 <Layout 
@@ -21,12 +22,15 @@ import Article from '../components/Article.astro';
 </div>
 
 <div class="articles-list">
-  <Article
-    title="Your Guide to Architectural Decisions in Enterprise Development with Module Federation"
-    date="January 29, 2025"
-    readTime="7 min read"
-    tags={['Microfrontends', 'Architecture']}
-  />
+  {blogPosts.map(post => (
+    <Article
+      title={post.title}
+      date={post.date}
+      readTime={post.readTime}
+      tags={post.tags}
+      href={`/blog/${post.slug}`}
+    />
+  ))}
 </div>
 
 </Layout>

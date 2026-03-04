@@ -5,30 +5,36 @@ interface Props {
   readTime: string;
   tags?: string[];
   headingLevel?: 'h2' | 'h3';
+  href?: string;
 }
 
-const { title, date, readTime, tags = [], headingLevel = 'h2' } = Astro.props;
+const { title, date, readTime, tags = [], headingLevel = 'h2', href } = Astro.props;
 
 const Heading = headingLevel;
 // Convert tags to lowercase hyphenated strings for data attribute
 const dataTags = tags.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(',');
+const hasLink = Boolean(href);
+const Wrapper: 'a' | 'div' = hasLink ? 'a' : 'div';
+const wrapperProps = hasLink
+  ? { href, 'aria-label': `Read ${title}` }
+  : {};
 ---
 
 <article class="article-card" data-tags={dataTags}>
-  <div class="article-meta">{date} · {readTime}</div>
-  <Heading>{title}</Heading>
-  {tags.length > 0 && (
-    <div class="article-tags">
-      {tags.map(tag => <span class="article-tag">{tag}</span>)}
-    </div>
-  )}
-  <span class="read-more">Read article →</span>
+  <Wrapper class="article-link" {...wrapperProps}>
+    <div class="article-meta">{date} · {readTime}</div>
+    <Heading>{title}</Heading>
+    {tags.length > 0 && (
+      <div class="article-tags">
+        {tags.map(tag => <span class="article-tag">{tag}</span>)}
+      </div>
+    )}
+    <span class="read-more">Read article →</span>
+  </Wrapper>
 </article>
 
 <style>
   .article-card {
-    text-decoration: none;
-    color: inherit;
     display: block;
     padding: var(--spacing-md);
     padding-left: var(--spacing-lg);
@@ -36,6 +42,12 @@ const dataTags = tags.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(',');
     background: transparent;
     transition: all 0.2s ease;
     position: relative;
+  }
+
+  .article-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
   }
 
   .article-card:hover {
