@@ -14,14 +14,13 @@ const {
   title,
   accentName,
   role,
-  description,
   ctaLabel,
   ctaHref,
 } = Astro.props;
 ---
 
 <section id="home" class="hero section-shell">
-  <div class="hero-left">
+  <div class="hero-container">
     <div class="hero-status-list">
       {statuses.map((status) => <div class="hero-status">{status}</div>)}
     </div>
@@ -32,7 +31,6 @@ const {
     </h1>
 
     <p class="hero-role">{role}</p>
-    <p class="hero-desc">{description}</p>
 
     <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
   </div>
