@@ -6,6 +6,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: clamp(15px, 0.25vw + 14px, 18px);
 }
 
 body {
@@ -16,7 +17,7 @@ body {
   transition: background-position 1.8s ease-out;
   color: var(--color-text-200);
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
@@ -40,7 +41,7 @@ a:hover {
 
 p,
 li {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 main {
