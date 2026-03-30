@@ -33,6 +33,7 @@ const {
     <slot />
 
     <script>
+      const scalingFactor = 2;
       const maxOffset = 16;
 
       const updateGridOffset = (event) => {
@@ -40,8 +41,8 @@ const {
         const viewportCenterY = window.innerHeight / 2;
         const normalizedX = (event.clientX - viewportCenterX) / viewportCenterX;
         const normalizedY = (event.clientY - viewportCenterY) / viewportCenterY;
-        const offsetX = -normalizedX * maxOffset;
-        const offsetY = -normalizedY * maxOffset;
+        const offsetX = -normalizedX * maxOffset * scalingFactor;
+        const offsetY = -normalizedY * maxOffset * scalingFactor;
 
         document.body.style.setProperty('--dot-grid-offset-x', `${offsetX.toFixed(2)}px`);
         document.body.style.setProperty('--dot-grid-offset-y', `${offsetY.toFixed(2)}px`);

@@ -10,7 +10,7 @@ html {
 
 body {
   background: var(--color-bg-900);
-  background-image: radial-gradient(circle, rgba(140, 140, 140, 0.16) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(140, 140, 140, 0.2) 1px, transparent 1px);
   background-size: 24px 24px;
   background-position: var(--dot-grid-offset-x, 0px) var(--dot-grid-offset-y, 0px);
   transition: background-position 1.8s ease-out;
