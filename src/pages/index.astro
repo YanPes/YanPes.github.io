@@ -4,7 +4,6 @@ import ArticlesSection from '../components/ArticlesSection.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteNav from '../components/SiteNav.astro';
-import StatsBar from '../components/StatsBar.astro';
 import TerminalSection from '../components/TerminalSection.astro';
 import { type ArticleItem, heroContent, navLinks, stackItems, stats } from '../data/siteContent';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -41,7 +40,6 @@ const recentArticles = posts.slice(1, 3).map((post) => toArticleCard(post));
 
   <main>
     <HeroSection {...heroContent} />
-    <StatsBar items={stats} />
     <ArticlesSection featured={featuredArticle} items={recentArticles} />
     <TerminalSection />
   </main>
