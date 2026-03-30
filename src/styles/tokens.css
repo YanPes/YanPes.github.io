@@ -1,0 +1,25 @@
+:root {
+  --color-accent: #c8f135;
+  --color-accent-dim: #8fb025;
+  --color-bg-900: #0a0a0a;
+  --color-bg-800: #111111;
+  --color-bg-700: #161616;
+  --color-text-100: #ffffff;
+  --color-text-200: #e8e8e0;
+  --color-text-500: #888880;
+  --color-text-600: #5a5a52;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(200, 241, 53, 0.3);
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+
+  --gutter: clamp(1.5rem, 5vw, 6rem);
+  --section-space: clamp(3rem, 6vw, 4rem);
+  --content-max-width: 1920px;
+  --radius-sm: 2px;
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --ease-default: ease;
+}

@@ -1,266 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ArticlesSection from '../components/ArticlesSection.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteNav from '../components/SiteNav.astro';
+import StackSection from '../components/StackSection.astro';
+import StatsBar from '../components/StatsBar.astro';
+import TerminalSection from '../components/TerminalSection.astro';
+import {
+  featuredArticle,
+  heroContent,
+  navLinks,
+  recentArticles,
+  stackItems,
+  stats,
+} from '../data/siteContent';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout>
-<section class="hero">
-  <div class="hero-copy">
-    <h1>Hi, I'm Yannik 👋</h1>
-      <h2>Software Architect, Problem Solver and Trailrunner</h2>
-      <p class="description">
-      I transform complex web systems into interconnected, scalable and maintainable ecosystems - Always sharing insights and my experiences from building distributed systems and modern web applications.
-    </p>
-    <div class="cta-buttons">
-      <a href="/blog" class="btn btn-primary">View my Articles</a>
-    </div>
-  </div>
+<BaseLayout>
+  <SiteNav logo="Yannik Peschke" links={navLinks} />
 
-  <figure class="hero-profile">
-    <img
-      src="/images/yannik-profile.jpg"
-      alt="Portrait of Yannik Peschke"
-      loading="eager"
-      decoding="async"
-      width="320"
-      height="320"
-    />
-  </figure>
-</section>
+  <main>
+    <HeroSection {...heroContent} />
+    <StatsBar items={stats} />
+    <ArticlesSection featured={featuredArticle} items={recentArticles} />
+    <TerminalSection />
+    <StackSection items={stackItems} />
+  </main>
 
-<section>
-  <h2>Recent Articles</h2>
-  <div class="blog-preview">
-    <article class="article-card">
-      <div class="article-meta">January 2026 · 8 min read</div>
-      <h3>Module Federation in Practice: Lessons from Production</h3>
-      <p class="article-excerpt">
-        After implementing module federation across multiple teams, I've learned what works 
-        and what doesn't. Here are the patterns that emerged from real-world usage.
-      </p>
-    </article>
-  </div>
-</section>
-</Layout>
-
-<style>
-.hero {
-  margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg) 0;
-  border-bottom: 1px solid var(--border-color);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--spacing-md);
-  align-items: start;
-}
-
-.hero-copy {
-  min-width: 0;
-}
-
-.hero-profile {
-  margin: 0;
-  width: clamp(130px, 24vw, 220px);
-  aspect-ratio: 1;
-  border-radius: 999px;
-  padding: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
-  justify-self: end;
-  transform: translateY(8px);
-}
-
-.hero-profile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 999px;
-  display: block;
-}
-
-.hero .subtitle {
-  font-family: var(--font-main);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--accent);
-  font-weight: 400;
-  margin-bottom: var(--spacing-md);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.hero .description {
-  font-size: 1rem;
-  max-width: 600px;
-  margin-bottom: var(--spacing-md);
-  color: var(--text-secondary);
-}
-
-.cta-buttons {
-  display: flex;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-  font-family: var(--font-main);
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  border: 1px solid var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-}
-
-.btn-primary {
-  background-color: transparent;
-  color: var(--accent);
-  box-shadow: none;
-}
-
-.btn-primary:hover {
-  background-color: var(--accent);
-  color: var(--bg-primary);
-  box-shadow: 0 0 20px rgba(192, 254, 4, 0.4);
-}
-
-.btn-primary::before {
-  content: "> ";
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border-color: var(--border-color);
-}
-
-.btn-secondary:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-  box-shadow: none;
-}
-
-
-.blog-preview {
-  display: grid;
-  gap: var(--spacing-md);
-}
-
-.article-card {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  padding: var(--spacing-md);
-  padding-left: var(--spacing-lg);
-  border-left: 1px solid var(--border-color);
-  background: transparent;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.article-card:hover {
-  border-left-color: var(--accent);
-  padding-left: calc(var(--spacing-lg) + 10px);
-}
-
-.article-card:last-child {
-  border-left: 1px solid var(--border-color);
-}
-
-.article-card:last-child:hover {
-  border-left-color: var(--accent);
-}
-
-.article-meta {
-  font-family: var(--font-main);
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-bottom: var(--spacing-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.article-card h3 {
-  transition: color 0.2s ease;
-  margin-bottom: var(--spacing-xs);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-}
-
-.article-card h3::before {
-  content: ">";
-  margin-right: 10px;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.2s ease;
-}
-
-.article-card:hover h3::before {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.article-card:hover h3 {
-  color: var(--accent);
-}
-
-.article-excerpt {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.about-grid {
-  display: grid;
-  gap: var(--spacing-lg);
-}
-
-.bio {
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-@media (max-width: 1024px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-profile {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding: var(--spacing-md) 0;
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .hero-profile {
-    order: -1;
-    justify-self: start;
-    width: 112px;
-    transform: none;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta-buttons {
-    width: 100%;
-  }
-
-  .btn {
-    flex: 1;
-    text-align: center;
-    min-width: 140px;
-  }
-}
-</style>
+  <SiteFooter />
+</BaseLayout>

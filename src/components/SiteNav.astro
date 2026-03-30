@@ -1,0 +1,30 @@
+---
+import type { NavLink } from '../data/siteContent';
+
+interface Props {
+  logo: string;
+  links: NavLink[];
+}
+
+const { logo, links } = Astro.props;
+---
+
+<nav class="site-nav">
+  <a href="#home" class="nav-logo">{logo}</a>
+  <ul class="nav-links">
+    {
+      links.map((link, index) => (
+        <li>
+          <a
+            href={link.href}
+            class={index === 0 ? 'active' : undefined}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

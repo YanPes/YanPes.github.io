@@ -1,0 +1,30 @@
+---
+import SectionHeader from './SectionHeader.astro';
+---
+
+<section id="about" class="section-shell">
+  <SectionHeader title="whoami" linkLabel="Full bio →" linkHref="#" />
+
+  <article class="terminal" aria-label="About me in terminal style">
+    <div class="terminal-bar">
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-title">yannik@omarchy ~ zsh</span>
+    </div>
+
+    <p><span class="t-prompt">yannik@omarchy</span> <span class="t-prompt">~</span> <span class="t-cmd">cat about.md</span></p>
+    <br />
+    <p class="t-green">## Software Architect</p>
+    <br />
+    <p class="t-out">I focus on transforming complex monolithic web systems into</p>
+    <p class="t-out">dynamic, interconnected micro-frontend architectures.</p>
+    <br />
+    <p class="t-out"><span class="t-blue">Expertise:</span> Module Federation · Rspack ecosystem · Distributed systems</p>
+    <p class="t-out"><span class="t-blue">OS:</span> Arch Linux (btw)</p>
+    <p class="t-out"><span class="t-blue">Editor:</span> Neovim</p>
+    <p class="t-out"><span class="t-blue">Hobbies:</span> Trail running · Reading · Cooking for humans</p>
+    <br />
+    <p><span class="t-prompt">yannik@omarchy</span> <span class="t-prompt">~</span> <span class="t-cursor"></span></p>
+  </article>
+</section>
