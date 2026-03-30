@@ -1,4 +1,6 @@
 ---
+import type { ContactLink } from '../data/siteContent';
+
 interface Props {
   statuses: string[];
   title: string;
@@ -7,6 +9,7 @@ interface Props {
   description: string;
   ctaLabel: string;
   ctaHref: string;
+  contactLinks: ContactLink[];
 }
 
 const {
@@ -16,6 +19,7 @@ const {
   role,
   ctaLabel,
   ctaHref,
+  contactLinks,
 } = Astro.props;
 ---
 
@@ -32,6 +36,18 @@ const {
 
     <p class="hero-role">{role}</p>
 
-    <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
+    <div class="hero-actions">
+      <div class="hero-contact-links" aria-label="Contact links">
+        {
+        contactLinks.map((link) => (
+        <a href={link.href} class="hero-contact-link" target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+          <img src={link.iconSrc} alt="" loading="lazy" decoding="async" />
+        </a>
+        ))
+        }
+      </div>
+      <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
+
+    </div>
   </div>
 </section>

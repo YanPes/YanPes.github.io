@@ -77,11 +77,14 @@
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 3rem;
   align-items: start;
   padding-top: 6rem;
   padding-bottom: 5rem;
+}
+
+.hero-container {
 }
 
 
@@ -181,6 +184,47 @@
   content: '→';
 }
 
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 2rem;
+}
+
+.hero-contact-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-800);
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default);
+}
+
+.hero-contact-link img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.hero-contact-link:hover,
+.hero-contact-link:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg-900);
+}
+
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -255,6 +299,10 @@
 .articles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  font-size: 1rem;
+  --article-ui-size: 0.5625em;
+  --article-title-size: 1.125em;
+  --article-copy-size: 0.8125em;
   gap: 1px;
   border: 1px solid var(--color-border);
   background: var(--color-border);
@@ -310,7 +358,7 @@
   color: var(--color-text-600);
   text-transform: uppercase;
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: var(--article-ui-size);
   letter-spacing: 0.12em;
 }
 
@@ -320,7 +368,7 @@
   color: var(--color-accent);
   text-transform: uppercase;
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: var(--article-ui-size);
   letter-spacing: 0.1em;
   padding: 2px 8px;
 }
@@ -328,7 +376,7 @@
 .article-title {
   color: var(--color-text-200);
   font-family: var(--font-sans);
-  font-size: 1.125rem;
+  font-size: var(--article-title-size);
   font-weight: 600;
   line-height: 1.3;
 }
@@ -340,7 +388,7 @@
 .article-excerpt {
   flex: 1;
   color: var(--color-text-600);
-  font-size: 0.8125rem;
+  font-size: var(--article-copy-size);
   line-height: 1.6;
 }
 
@@ -351,7 +399,7 @@
   color: var(--color-text-600);
   text-transform: uppercase;
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: var(--article-ui-size);
   letter-spacing: 0.12em;
 }
 
