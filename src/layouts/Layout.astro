@@ -43,6 +43,7 @@ const {
   --text-secondary: #cccccc;
   --text-tertiary: #888888;
   --border-color: #333333;
+  --dot-grid-color: rgba(140, 140, 140, 0.28);
   --accent: rgb(192, 254, 4);
   --accent-secondary: #ffffff;
   --accent-hover: rgba(192, 254, 4, 0.8);
@@ -69,7 +70,10 @@ body {
   line-height: 1.6;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: var(--dot-grid-offset-x, 0px) var(--dot-grid-offset-y, 0px);
+  transition: background-color 0.3s ease, color 0.3s ease, background-position 1.8s ease-out;
 }
 
 main {
@@ -159,3 +163,27 @@ blockquote {
   }
 }
 </style>
+
+<script>
+  const maxOffset = 16;
+
+  const updateGridOffset = (event) => {
+    const viewportCenterX = window.innerWidth / 2;
+    const viewportCenterY = window.innerHeight / 2;
+    const normalizedX = (event.clientX - viewportCenterX) / viewportCenterX;
+    const normalizedY = (event.clientY - viewportCenterY) / viewportCenterY;
+    const offsetX = -normalizedX * maxOffset;
+    const offsetY = -normalizedY * maxOffset;
+
+    document.body.style.setProperty("--dot-grid-offset-x", `${offsetX.toFixed(2)}px`);
+    document.body.style.setProperty("--dot-grid-offset-y", `${offsetY.toFixed(2)}px`);
+  };
+
+  const resetGridOffset = () => {
+    document.body.style.setProperty("--dot-grid-offset-x", "0px");
+    document.body.style.setProperty("--dot-grid-offset-y", "0px");
+  };
+
+  window.addEventListener("pointermove", updateGridOffset);
+  window.addEventListener("pointerleave", resetGridOffset);
+</script>
