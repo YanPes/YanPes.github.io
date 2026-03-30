@@ -11,6 +11,8 @@ tags:
 draft: false
 ---
 
+![Article Banner Image](/images/articles/your-guide-to-architectural-decisions-in-enterprise-development-with-module-federation-1.webp)
+
 ## Introduction
 
 Every now and then questions about Module Federation pop up in social media:
