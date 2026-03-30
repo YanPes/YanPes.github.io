@@ -4,7 +4,7 @@ import ArticleCard from './ArticleCard.astro';
 import SectionHeader from './SectionHeader.astro';
 
 interface Props {
-  featured: ArticleItem;
+  featured: ArticleItem | null;
   items: ArticleItem[];
 }
 
@@ -12,10 +12,16 @@ const { featured, items } = Astro.props;
 ---
 
 <section id="articles" class="section-shell">
-  <SectionHeader title="Recent Articles" linkLabel="All articles →" linkHref="#" />
+  <SectionHeader title="Recent Articles" linkLabel="All articles →" linkHref="/articles" />
 
-  <div class="articles-grid">
-    <ArticleCard article={featured} featured />
-    {items.map((article) => <ArticleCard article={article} />)}
-  </div>
+  {
+    featured ? (
+      <div class="articles-grid">
+        <ArticleCard article={featured} featured />
+        {items.map((article) => <ArticleCard article={article} />)}
+      </div>
+    ) : (
+      <p class="articles-empty">No articles yet. Add markdown files to `src/content/blog` to generate routes.</p>
+    )
+  }
 </section>

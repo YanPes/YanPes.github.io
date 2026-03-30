@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import { navLinks } from '../../data/siteContent';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout title="Articles — Yannik Peschke" description="Technical articles and notes by Yannik Peschke.">
+  <SiteNav logo="Yannik Peschke" links={navLinks} />
+
+  <main>
+    <section class="section-shell articles-page">
+      <header class="articles-header">
+        <p class="articles-eyebrow">Articles</p>
+        <h1 class="articles-title">Markdown-driven publishing</h1>
+        <p class="articles-subtitle">
+          Add new files in <code>src/content/blog</code> and Astro will generate routes automatically.
+        </p>
+      </header>
+
+      <div class="articles-list">
+        {posts.map((post) => (
+          <article class="article-row">
+            <a href={`/articles/${post.slug}`} class="article-link">
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </a>
+            <p class="article-meta">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .articles-page {
+    padding-top: 7rem;
+  }
+
+  .articles-header {
+    margin-bottom: 2rem;
+  }
+
+  .articles-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .articles-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--color-text-100);
+    margin-bottom: 0.75rem;
+  }
+
+  .articles-subtitle {
+    color: var(--color-text-500);
+    max-width: 52ch;
+  }
+
+  .articles-list {
+    border: 1px solid var(--color-border);
+  }
+
+  .article-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .article-row:last-child {
+    border-bottom: 0;
+  }
+
+  .article-link {
+    text-decoration: none;
+  }
+
+  .article-link h2 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .article-link p,
+  .article-meta {
+    color: var(--color-text-500);
+    font-size: 0.95rem;
+  }
+
+  .article-meta {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 720px) {
+    .article-row {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -7,17 +7,30 @@ interface Props {
 }
 
 const { logo, links } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href.startsWith('http')) {
+    return false;
+  }
+
+  if (href.startsWith('#')) {
+    return pathname === '/';
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
 ---
 
 <nav class="site-nav">
-  <a href="#home" class="nav-logo">{logo}</a>
+  <a href="/" class="nav-logo">{logo}</a>
   <ul class="nav-links">
     {
-      links.map((link, index) => (
+      links.map((link) => (
         <li>
           <a
             href={link.href}
-            class={index === 0 ? 'active' : undefined}
+            class={isActive(link.href) ? 'active' : undefined}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           >
