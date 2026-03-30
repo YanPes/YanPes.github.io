@@ -24,7 +24,7 @@ export interface StackItem {
 }
 
 export const navLinks: NavLink[] = [
-  { label: 'Home', href: '#home' },
+  { label: 'Home', href: '/' },
   { label: 'About', href: '#about' },
   { label: 'Articles', href: '/articles' },
   { label: 'Reading', href: '/articles' },
