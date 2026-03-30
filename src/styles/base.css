@@ -1,0 +1,66 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-900);
+  background-image: radial-gradient(circle, rgba(140, 140, 140, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: var(--dot-grid-offset-x, 0px) var(--dot-grid-offset-y, 0px);
+  transition: background-position 1.8s ease-out;
+  color: var(--color-text-200);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: min(100%, var(--content-max-width));
+  margin-inline: auto;
+  padding-top: 4rem;
+}
+
+.section-shell {
+  padding: var(--section-space) var(--gutter);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}

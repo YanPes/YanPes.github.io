@@ -1,0 +1,43 @@
+---
+import type { NavLink } from '../data/siteContent';
+
+interface Props {
+  logo: string;
+  links: NavLink[];
+}
+
+const { logo, links } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href.startsWith('http')) {
+    return false;
+  }
+
+  if (href.startsWith('#')) {
+    return pathname === '/';
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+---
+
+<nav class="site-nav">
+  <a href="/" class="nav-logo">{logo}</a>
+  <ul class="nav-links">
+    {
+      links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={isActive(link.href) ? 'active' : undefined}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

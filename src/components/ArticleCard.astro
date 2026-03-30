@@ -1,0 +1,31 @@
+---
+import type { ArticleItem } from '../data/siteContent';
+
+interface Props {
+  article: ArticleItem;
+  featured?: boolean;
+}
+
+const { article, featured = false } = Astro.props;
+const isExternal = article.href.startsWith('http');
+---
+
+<a
+  class:list={['article-card', { featured }]}
+  href={article.href}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+  {featured && <div class="featured-number">{article.featuredNumber}</div>}
+
+  <div class={featured ? 'featured-body' : undefined}>
+    <div class="article-meta">
+      <span class="article-date">{article.date} · {article.readTime}</span>
+      <span class="article-tag">{article.tag}</span>
+    </div>
+
+    <h3 class="article-title">{article.title}</h3>
+    <p class="article-excerpt">{article.excerpt}</p>
+    <span class="article-read">Read article</span>
+  </div>
+</a>

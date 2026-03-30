@@ -1,0 +1,39 @@
+---
+interface Props {
+  statuses: string[];
+  title: string;
+  accentName: string;
+  role: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const {
+  statuses,
+  title,
+  accentName,
+  role,
+  description,
+  ctaLabel,
+  ctaHref,
+} = Astro.props;
+---
+
+<section id="home" class="hero section-shell">
+  <div class="hero-left">
+    <div class="hero-status-list">
+      {statuses.map((status) => <div class="hero-status">{status}</div>)}
+    </div>
+
+    <h1 class="hero-title">
+      {title}<br />
+      <span class="accent">{accentName}</span>
+    </h1>
+
+    <p class="hero-role">{role}</p>
+    <p class="hero-desc">{description}</p>
+
+    <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
+  </div>
+</section>
