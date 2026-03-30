@@ -37,6 +37,24 @@ main {
   padding-top: 4rem;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-progress__bar {
+  width: var(--scroll-progress, 0%);
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), #f6ffab);
+  transition: width 0.1s linear;
+}
+
 .section-shell {
   padding: var(--section-space) var(--gutter);
   border-bottom: 1px solid var(--color-border);
