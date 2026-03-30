@@ -28,7 +28,19 @@ img {
 }
 
 a {
-  color: inherit;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1.5px;
+}
+
+a:hover {
+  color: var(--color-accent-dim);
+}
+
+p,
+li {
+  font-size: 16px;
 }
 
 main {
