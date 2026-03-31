@@ -40,6 +40,15 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
         </p>
         <h1>{post.data.title}</h1>
         <p class="article-description">{post.data.description}</p>
+        {
+          post.data.tags.length > 0 && (
+            <ul class="article-tags" aria-label="Article tags">
+              {post.data.tags.map((tag) => (
+                <li class="article-tag">{tag}</li>
+              ))}
+            </ul>
+          )
+        }
       </header>
 
       <div class="article-layout">
@@ -117,6 +126,24 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     font-size: 1.1rem;
     line-height: 1.7;
     letter-spacing: 0.002em;
+  }
+
+  .article-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    list-style: none;
+  }
+
+  .article-tag {
+    border: 1px solid rgba(200, 241, 53, 0.2);
+    background: rgba(200, 241, 53, 0.08);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.55rem;
   }
 
   .article-layout {
