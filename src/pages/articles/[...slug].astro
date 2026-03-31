@@ -19,7 +19,8 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3);
 ---
 
 <BaseLayout title={`${post.data.title} — Yannik Peschke`} description={post.data.description}>
@@ -41,8 +42,26 @@ const { Content } = await post.render();
         <p class="article-description">{post.data.description}</p>
       </header>
 
-      <div class="article-content">
-        <Content />
+      <div class="article-layout">
+        <div class="article-content">
+          <Content />
+        </div>
+        {
+          articleOutline.length > 0 && (
+            <aside class="article-outline" aria-label="Article outline">
+              <p class="article-outline-title">Overview</p>
+
+              <ul class="article-outline-list">
+                {articleOutline.map((heading) => (
+                  <li class:list={['article-outline-item', heading.depth === 3 && 'is-subitem']}>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )
+        }
+
       </div>
     </article>
   </main>
@@ -97,6 +116,57 @@ const { Content } = await post.render();
     max-width: 65ch;
   }
 
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px) ;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .article-outline {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-800);
+    padding: 1rem;
+    position: sticky;
+    top: 7rem;
+  }
+
+  .article-outline-title {
+    margin-bottom: 0.75rem;
+    color: var(--color-text-600);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .article-outline-list {
+    list-style: none;
+  }
+
+  .article-outline-item + .article-outline-item {
+    margin-top: 0.4rem;
+  }
+
+  .article-outline-item a {
+    color: var(--color-text-500);
+    text-decoration: none;
+    line-height: 1.45;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .article-outline-item a:hover,
+  .article-outline-item a:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .article-outline-item.is-subitem a {
+    display: inline-block;
+    padding-left: 0.9rem;
+    color: var(--color-text-600);
+    font-size: 0.95em;
+  }
+
   .article-content {
     color: var(--color-text-200);
   }
@@ -106,6 +176,7 @@ const { Content } = await post.render();
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     font-family: var(--font-mono);
+    scroll-margin-top: 5rem;
   }
 
   .article-content :global(p),
@@ -124,5 +195,16 @@ const { Content } = await post.render();
     padding: 0.1rem 0.3rem;
     border-radius: 4px;
     color: var(--color-accent);
+  }
+
+  @media (max-width: 980px) {
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .article-outline {
+      position: static;
+    }
   }
 </style>
