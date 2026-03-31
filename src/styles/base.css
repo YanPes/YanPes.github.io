@@ -17,8 +17,12 @@ body {
   transition: background-position 1.8s ease-out;
   color: var(--color-text-200);
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: clamp(1rem, 0.22vw + 0.95rem, 1.125rem);
+  line-height: 1.7;
+  letter-spacing: 0.003em;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings: 'kern', 'liga', 'calt';
   min-height: 100vh;
   overflow-x: hidden;
 }

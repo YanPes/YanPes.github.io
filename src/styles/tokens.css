@@ -12,7 +12,7 @@
   --color-border-accent: rgba(200, 241, 53, 0.3);
 
   --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Space Grotesk', sans-serif;
+  --font-sans: 'Source Sans 3', sans-serif;
 
   --gutter: clamp(1.5rem, 5vw, 6rem);
   --section-space: clamp(3rem, 6vw, 4rem);

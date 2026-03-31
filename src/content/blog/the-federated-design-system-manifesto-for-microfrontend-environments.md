@@ -39,7 +39,7 @@ We can solve this by moving the source of truth out of the Host and into an inde
 ![After: Federated Design System (Contract-Based)](/images/articles/the-federated-design-system-manifesto-for-microfrontend-environments-3.webp)
 Here is the architecture — and why it works.
 
-## 1. Design Tokens Are the Only Source of Truth
+## Design Tokens Are the Only Source of Truth
 
 The foundation is brutally simple: a versioned npm package that contains only CSS variables and basic CSS declarations for font definitions, resets, and similar essentials. No components, no styling opinions — just design tokens and a minimal setup.
 
@@ -55,7 +55,7 @@ No rebuild. No redeploy. No drama.
 
 > If your micro-frontend needs a rebuild to pick up a color change, it’s not federated. It’s coupled.
 
-## 2. The Singleton Theme Loader: Kill Multi-Injection
+## The Singleton Theme Loader: Kill Multi-Injection
 
 Micro-frontends share a runtime, which means they share the DOM.
 Without protection, every MFE injects its own copy of theme styles. That leads to:
@@ -111,7 +111,7 @@ export { loadGlobalStyles, isGlobalStylesLoaded };
 
 The big benefit this creates is pretty clear. Only one design token instance lives in memory. As a result we have aligned and predictable global CSS behavior in a federated system.
 
-## 3. Components Enforce UX Consistency
+## Components Enforce UX Consistency
 
 Design Tokens align colors and spacing. They do not enforce behavior. So we need to ship primitive brand components built on the design token layer:
 
@@ -127,7 +127,7 @@ The payment confirmation button must feel identical to the save button in your u
 
 > If every team builds its own Button, you don’t have a design system — you have a design suggestion.
 
-## 4. Asset Sovereignty: Draw the Line
+## Asset Sovereignty: Draw the Line
 
 This is where most federated systems rot. If you don’t define ownership, everything becomes global — or worse, duplicated.
 
@@ -151,7 +151,7 @@ If it’s not reusable or relevant across the ecosystem, it doesn’t belong in 
 
 > Federation requires boundaries. Keep them sharp and you can scale.
 
-## 5. Namespace Discipline: Stop Style Bleed
+## Namespace Discipline: Stop Style Bleed
 
 Shared runtimes punish sloppy naming. We must enforce strict prefixing via localIdentName.
 
@@ -195,7 +195,7 @@ collide between applications */
 .card {}
 ```
 
-## 6. Governance: The Social Contract
+## Governance: The Social Contract
 
 A federated system without proper governance will collapse sooner or later. When working with decentralized teams it is key to create clear and strict guardrails to keep the whole system scalable and maintainable.
 
@@ -236,7 +236,7 @@ The backward compatible mapping is additional effort but it prevents us from:
 
 > Without this rule, your micro-frontends are fake independent.
 
-## 7. Independent Execution (Yes, It Still Works Locally)
+## Independent Execution (Yes, It Still Works Locally)
 
 With the Singleton Theme Loader in place, MFEs can still run standalone without losing global theme context if not connected to a Host system. This is a small but crucial detail creating a higher degree on autonomy.injects
 
@@ -244,7 +244,7 @@ With the Singleton Theme Loader in place, MFEs can still run standalone without 
 - Global styling still works
 - Local development remains frictionless.
 
-## 8. Final Take: Decentralized Teams, Unified Experience
+## Final Take: Decentralized Teams, Unified Experience
 
 By following the above mentioned points we can ensure:
 

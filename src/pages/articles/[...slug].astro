@@ -118,7 +118,7 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
 
   .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px) ;
+    grid-template-columns: minmax(0, 70ch) minmax(220px, 1fr) ;
     align-items: start;
     gap: 2rem;
   }
@@ -160,6 +160,8 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     color: var(--color-accent);
   }
 
+
+
   .article-outline-item.is-subitem a {
     display: inline-block;
     padding-left: 0.9rem;
@@ -167,8 +169,14 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     font-size: 0.95em;
   }
 
+  .article-outline-item.is-subitem a:hover,
+  .article-outline-item.is-subitem a:focus-visible {
+    color: var(--color-accent-dim);
+  }
+
   .article-content {
     color: var(--color-text-200);
+    max-width: 70ch;
   }
 
   .article-content :global(h2),
@@ -180,20 +188,28 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
   }
 
   .article-content :global(h2) {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    position: relative;
+    padding-left: 1.3rem;
   }
 
   .article-content :global(h2)::before {
     content: '_';
+    position: absolute;
+    top: 7px;
+    left: 0;
     color: var(--color-accent);
+    line-height: 1;
   }
 
   .article-content :global(p),
   .article-content :global(li) {
     color: var(--color-text-200);
-    line-height: 1.75;
+    line-height: 1.78;
+    letter-spacing: 0.002em;
+  }
+
+  .article-content :global(p) {
+    margin: 0 0 1rem;
   }
 
   .article-content :global(ul) {
@@ -228,6 +244,11 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     height: auto;
     margin: 1.5rem 0;
   }
+
+  .article-content :global(img):first-child() {
+    margin-top: 0;
+  }
+
 
   @media (max-width: 980px) {
     .article-layout {
