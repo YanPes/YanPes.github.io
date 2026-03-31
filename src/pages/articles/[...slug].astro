@@ -179,9 +179,20 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     scroll-margin-top: 5rem;
   }
 
+  .article-content :global(h2) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .article-content :global(h2)::before {
+    content: '_';
+    color: var(--color-accent);
+  }
+
   .article-content :global(p),
   .article-content :global(li) {
-    color: var(--color-text-500);
+    color: var(--color-text-200);
     line-height: 1.75;
   }
 

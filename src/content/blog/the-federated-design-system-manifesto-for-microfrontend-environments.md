@@ -157,9 +157,12 @@ Shared runtimes punish sloppy naming. We must enforce strict prefixing via local
 
 ### For global system wide desgin tokens:
 
-```css 
-// This is just an example. 
-// Use -ds prefix to define that this part belongs to the design system
+```typescript 
+/*
+This is just an example. 
+Use -ds prefix to define that this part belongs to the design system
+*/
+
 localIdentName: "[local]--[hash:base64:5]-ds"
 ```
 
@@ -167,10 +170,13 @@ These global definitions should be owned by the central Design/Architecture team
 
 ### Application‑scoped design tokens
 
-```css 
-// This is just an example. 
-// Use -mfe-<application-name> prefix to define that this part belongs to 
-// a specific application. This also helps e2e tests and debugging later on
+```typescript
+/*
+This is just an example. 
+Use -mfe-<application-name> prefix to define that this part belongs to 
+a specific application. This also helps e2e tests and debugging later on
+*/
+
 localIdentName: "[local]--[hash:base64:5]-mfe-<application-name>"
 ```
 
@@ -180,7 +186,8 @@ We have to be strict about this because common CSS definitions like the followin
 
 
 ```css 
-/* Small example of definitions that will most certainly 
+/* 
+Small example of definitions that will most certainly 
 collide between applications */
 .main {}
 .container {}
@@ -241,17 +248,17 @@ With the Singleton Theme Loader in place, MFEs can still run standalone without 
 
 By following the above mentioned points we can ensure:
 
-✅ Runtime‑safe theming
+- ✅  Runtime‑safe theming
 
-✅ Zero DOM duplication
+- ✅  Zero DOM duplication
 
-✅ Predictable styling
+- ✅  Predictable styling
 
-✅ Independent team velocity (for style handling)
+- ✅  Independent team velocity (for style handling)
 
-✅ Resilience to brand evolution
+- ✅  Resilience to brand evolution
 
-✅System-wide consistent look and feel
+- ✅  System-wide consistent look and feel
 
 The Federated Design System is not just a styling strategy — it is an organizational scaling mechanism that will help you stay productive in a federated architecture. Build it early. Enforce it strictly. Your future teams will thank you.
 
