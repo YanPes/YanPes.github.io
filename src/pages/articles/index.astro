@@ -53,6 +53,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 
   .articles-header {
     margin-bottom: 2rem;
+    max-width: 68ch;
   }
 
   .articles-eyebrow {
@@ -83,6 +84,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   .article-row {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem;
     border-bottom: 1px solid var(--color-border);
@@ -115,9 +117,50 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
     letter-spacing: 0.08em;
   }
 
+  @media (max-width: 900px) {
+    .articles-page {
+      padding-top: 2.2rem;
+    }
+
+    .article-row {
+      padding: 1rem;
+    }
+  }
+
   @media (max-width: 720px) {
     .article-row {
       flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .article-meta {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .articles-page {
+      padding-top: 1.75rem;
+    }
+
+    .articles-title {
+      font-size: clamp(1.4rem, 7.2vw, 1.85rem);
+    }
+
+    .articles-subtitle {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .article-link h2 {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .article-link p,
+    .article-meta {
+      font-size: 0.85rem;
     }
   }
 </style>
