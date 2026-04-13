@@ -65,7 +65,7 @@ export const contactLinks: ContactLink[] = [
 ];
 
 export const heroContent = {
-  statuses: ['Available for consulting', 'Available for hire'],
+  statuses: ['Available for consulting', 'Open to new challenges'],
   title: "Hi, I am ",
   accentName: 'Yannik.',
   role: 'Software Architect · Teacher & Mentor · Problem Solver · Trailrunner',
