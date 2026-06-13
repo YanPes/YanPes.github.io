@@ -479,6 +479,46 @@
   animation: blink 1s step-end infinite;
 }
 
+.digital-friends-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
+  gap: 1px;
+  border: 1px solid var(--color-border);
+  background: var(--color-border);
+}
+
+.digital-friends-copy,
+.digital-friends-protocol {
+  background: var(--color-bg-800);
+  padding: 1.5rem;
+}
+
+.digital-friends-copy {
+  color: var(--color-text-500);
+  line-height: 1.7;
+}
+
+.digital-friends-copy p + h3 {
+  margin-top: 1.75rem;
+}
+
+.digital-friends-copy h3 {
+  color: var(--color-text-200);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.digital-friends-protocol {
+  overflow-x: auto;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  white-space: pre;
+}
+
 .stack-grid {
   display: flex;
   flex-wrap: wrap;
@@ -647,6 +687,10 @@
     padding: 1.1rem;
   }
 
+  .digital-friends-card {
+    grid-template-columns: 1fr;
+  }
+
   .footer-links {
     gap: 1.1rem;
   }
@@ -748,6 +792,16 @@
     font-size: 0.68rem;
     line-height: 1.7;
     padding: 0.9rem;
+  }
+
+  .digital-friends-copy,
+  .digital-friends-protocol {
+    padding: 0.9rem;
+  }
+
+  .digital-friends-protocol {
+    font-size: 0.62rem;
+    line-height: 1.7;
   }
 
   .terminal-title {
