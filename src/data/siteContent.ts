@@ -68,7 +68,7 @@ export const heroContent = {
   statuses: ['Available for consulting', 'Open to new challenges'],
   title: "Hi, I am ",
   accentName: 'Yannik.',
-  role: 'Software Architect · Teacher & Mentor · Problem Solver · Trailrunner',
+  role: 'Platform Architect · Teacher & Mentor · Problem Solver · Trailrunner',
   ctaLabel: 'Read my articles',
   ctaHref: '/articles',
   contactLinks,
