@@ -1,16 +1,14 @@
 ---
 title: "Turn Messy React Codebases into Maintainable Systems with Clean Architecture"
-description: ""
+description: "A practical guide to structuring React apps with clear UI, state, service, and converter boundaries to reduce coupling, improve testability, and speed up team onboarding."
 date: 2026-06-21
-readTime: 7 min
+readTime: 6 min
 tags:
   - Architecture
-  - Microfrontends
-  - Corporate Strategy
-draft: true
+  - React
+  - Clean Architecture
+draft: false
 ---
-
-![Article Banner Image](/images/articles/your-guide-to-architectural-decisions-in-enterprise-development-with-module-federation-1.webp)
 
 ## Introduction
 
@@ -37,7 +35,7 @@ This is a **reference model**, not a mandatory structure for every React app.
 
 `ProductPage` triggers `loadProduct`, the state orchestration layer calls `ProductService`, `ProductService` orchestrates API calls and business rules, then delegates data shaping to `ProductConverter`. The converter returns a stable `ProductDTO` that application state stores and the UI renders via `ProductView`.
 
-![The four layers](/images/articles/the-federated-design-system-manifesto-for-microfrontend-environments-2.webp)
+![The four layers](/images/articles/turn-messy-react-codebases-into-maintainable-systems-with-clean-architecture.webp)
 
 This separation creates a shared language across the team:
 
@@ -46,7 +44,7 @@ This separation creates a shared language across the team:
 - Business rules and orchestration belong in services
 - Data contract shaping belongs in converters/normalizers
 
-As systems grow, this shared language becomes more valuable than any single implementation detail.
+> As systems grow, this shared language becomes more valuable than any single implementation detail.
 
 ## Service Layer - Business Logic and Orchestration
 
@@ -120,7 +118,7 @@ Responsibilities:
 
 Many teams debate implementation details here: schema validation, mappers, parsers, runtime type guards, or generated clients. These choices evolve over time.
 
-The principle remains stable: **have one explicit boundary where external data becomes internal data**.
+> The principle remains stable: **have one explicit boundary where external data becomes internal data**.
 
 One important distinction:
 
@@ -216,7 +214,7 @@ Responsibilities:
 
 The UI should stay focused on presentation.
 
-When components only answer *“what should be displayed?”* rather than *“how does the system work?”*, they are easier to test, reuse, and understand.
+> When components only answer *“what should be displayed?”* rather than *“how does the system work?”*, they are easier to test, reuse, and understand.
 
 ```tsx
 // pages/ProductPage.tsx
@@ -291,7 +289,7 @@ New team members learn faster because there is a clear answer to one recurring q
 
 Dependency Injection in frontend can be a polarizing topic. Not every app needs full constructor-based DI.
 
-The important point is simpler: avoid hard-coupling business logic to concrete implementations when you need testability and replaceability.
+> The important point is simpler: avoid hard-coupling business logic to concrete implementations when you need testability and replaceability.
 
 Use DI where it adds clear value:
 
@@ -316,19 +314,19 @@ Clear architectural boundaries help both humans and AI produce consistent, predi
 
 **Isn't this overengineering for small apps?**
 
-Sometimes yes. For prototypes and very small products, overhead may not be justified. Introduce structure when complexity starts creating friction.
+> Sometimes yes. For prototypes and very small products, overhead may not be justified. Introduce structure when complexity starts creating friction.
 
 **Doesn't this add boilerplate?**
 
-Some structure does add code. In growing systems, that cost is often repaid through easier debugging, safer changes, and better team coordination.
+> Some structure does add code. In growing systems, that cost is often repaid through easier debugging, safer changes, and better team coordination.
 
 **How can teams adopt it gradually?**
 
-Start with one feature. Refactor one workflow using this model. Document it as a reference. Let architecture evolve with the codebase.
+> Start with one feature. Refactor one workflow using this model. Document it as a reference. Let architecture evolve with the codebase.
 
 **What about RSC, framework loaders, or TanStack Query?**
 
-Great options. They may reduce or replace parts of a traditional store layer. The principle still applies: keep responsibilities explicit and boundaries clear.
+> Great options. They may reduce or replace parts of a traditional store layer. The principle still applies: keep responsibilities explicit and boundaries clear.
 
 ## Conclusion
 
