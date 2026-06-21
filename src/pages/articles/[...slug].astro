@@ -260,6 +260,18 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     margin: 0 0 1rem;
   }
 
+  .article-content :global(blockquote) {
+    margin: 1.25rem 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--color-accent);
+    background: rgba(200, 241, 53, 0.06);
+    color: var(--color-text-100);
+  }
+
+  .article-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
   .article-content :global(ul) {
     margin: 0.5rem 0 1rem 1.25rem;
   }
