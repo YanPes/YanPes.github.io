@@ -14,56 +14,56 @@ draft: true
 
 ## Introduction
 
-Every frontend engineer has encountered a messy React codebase: components that fetch data, manipulate it, manage local state, and render everything — all at once.
+Every frontend engineer has seen a messy React codebase: components that fetch data, transform it, manage state, and render everything — all at once.
 
-That flexibility is great for prototypes, MVPs, or simple CRUD SPAs, but in big team compositions and large scale monorepos containing a truck load of complexity it mostly becomes a liability. Bugs accumu;ate, onboarding processes slow down, and maintenance turns into a guessing game.
+That flexibility is great for prototypes, MVPs, and simple CRUD SPAs. But in large-scale products, with multiple teams and growing domain complexity, it often becomes a liability. Bugs accumulate, onboarding slows down, and maintenance turns into a guessing game.
 
-I've seen teams stuck in this cycle: Features breaking seemingly unrelated areas, mysterious side effects appearing from nowhere, and new hires struggling to understand where business logic actually lives.
+I have seen teams get stuck in this loop: features breaking unrelated areas, side effects appearing from nowhere, and new hires struggling to understand where business logic actually lives.
 
-At my company, I help teams introduce a lightweight version of the Clean Architecture pattern tailored for React. The goal is not to add layers for the sake of architecture. The goal is to create predictable ownership, explicit boundaries, reduced coupling, easier testing, and faster onboarding.
+At my company, I help teams introduce a lightweight, pragmatic adaptation of Clean Architecture for React. The goal is not to add layers for the sake of architecture. The goal is to create predictable ownership, explicit boundaries, reduced coupling, easier testing, and faster onboarding.
 
-The idea is simple: Give each part of the application a single responsibility and define clear boundaries between them. When responsibilities are predictable, developers know where to implement features, where to analyze the behavior of a bug, and how to make changes without fear of unintended consequences.
+The core idea is simple: give each part of the application a single responsibility and define clear boundaries between them. When responsibilities are predictable, developers know where to implement features, where to investigate bugs, and how to make changes without fear of unintended consequences.
 
 ## Core Principles
 
 - **Separation of Concerns:** Split responsibilities so each part of the system does one thing well.
 - **Directional Dependencies:** Higher-level parts depend on abstractions rather than low-level implementation details.
-- **Explicit Boundaries:** Define clear contracts between layers so data transformations remain predictable and easy to reason about
-- **Predictable Ownership:** Every piece of logic should have an obvious home. When developers know where functionality belongs, collaboration becomes easier and maintenance becomes significantly less expensive.
+- **Explicit Boundaries:** Define clear contracts between layers so data transformations remain predictable and easy to reason about.
+- **Predictable Ownership:** Every piece of logic should have an obvious home.
 
-## The Four-Layer Adaption for React
+## A Pragmatic Four-Layer Adaptation for React
 
-The following structure is a lightweight adaption tailored to React applications.
+This is a **reference model**, not a mandatory structure for every React app.
 
-ProductPage (container) triggers loadProduct, the store calls ProductService, ProductService orchestrates API calls and domain rules then delegates normalization to ProductConverter, which returns a ProductDTO that the store stores and the UI renders via ProductView.
-
+`ProductPage` triggers `loadProduct`, the state orchestration layer calls `ProductService`, `ProductService` orchestrates API calls and business rules, then delegates data shaping to `ProductConverter`. The converter returns a stable `ProductDTO` that application state stores and the UI renders via `ProductView`.
 
 ![The four layers](/images/articles/the-federated-design-system-manifesto-for-microfrontend-environments-2.webp)
 
-This separation creates a common language across the team:
+This separation creates a shared language across the team:
 
-- UI problems belong in components
-- State problems belong in stores
-- Business logic belongs in servives
-- Data shaping problems belong in normalization logic (E.g. converters)
+- UI concerns belong in components
+- State orchestration concerns belong in stores/hooks/query flows
+- Business rules and orchestration belong in services
+- Data contract shaping belongs in converters/normalizers
 
-As applications grow, this shared understanding becomes more valuable than any individual implementation detail.
+As systems grow, this shared language becomes more valuable than any single implementation detail.
 
 ## Service Layer - Business Logic and Orchestration
 
 Responsibilities:
 
 - API communication
-- Retry strategies
+- Retry and fallback strategies
 - Caching orchestration
-- Business logic
+- Business rules
 
 The Service layer should not know about component structure, UI concerns, or rendering behavior.
 
 ```ts
 // services/ProductService.ts
-import { ProductDTO } from '@/types/product';
+import ApiClient from '@/infra/ApiClient';
 import { ProductConverter } from '@/converters/product-converter';
+import { ProductDTO, ProductWithInventoryDTO, RawProduct, RawInventory } from '@/types/product';
 import { ProductUnavailableError, mapToProductError } from '@/services/errors';
 
 export class ProductService {
@@ -72,69 +72,83 @@ export class ProductService {
     private readonly converter: ProductConverter
   ) {}
 
-  // Returns a typed DTO. The store doesn't need to know API shapes or endpoints.
-  public async getProductDto(productId: string): Promise<ProductDTO> {
+  // The store does not need to know endpoints or raw API shapes.
+  public async getProductDTO(productId: string): Promise<ProductDTO> {
     try {
-      const rawData = await this.apiClient.endpoints.product.getProduct(productId);
+      const rawProduct: RawProduct = await this.apiClient.endpoints.product.getProduct(productId);
 
-      // Domain rule: treat discontinued products as unavailable
-      if (rawData.isDiscontinued) {
+      if (rawProduct.isDiscontinued) {
         throw new ProductUnavailableError(productId);
       }
 
-      return this.converter.toProductDTO(rawData);
-    } catch (err) {
-      // Map low-level errors to domain-level errors
-      throw mapToProductError(err, productId);
+      return this.converter.toProductDTO(rawProduct);
+    } catch (error) {
+      if (error instanceof ProductUnavailableError) throw error;
+      throw mapToProductError(error, productId);
     }
   }
 
-  // Example of an orchestrated method that composes multiple endpoints
-  public async getProductWithInventory(productId: string): Promise<ProductDTO & { inventory: number }> {
+  public async getProductWithInventoryDTO(productId: string): Promise<ProductWithInventoryDTO> {
     try {
-      const [rawProduct, rawInventory] = await Promise.all([
+      const [rawProduct, rawInventory]: [RawProduct, RawInventory] = await Promise.all([
         this.apiClient.endpoints.product.getProduct(productId),
-        this.apiClient.endpoints.inventory.getInventory(productId)
+        this.apiClient.endpoints.inventory.getInventory(productId),
       ]);
 
-      if (rawProduct.isDiscontinued) throw new ProductUnavailableError(productId);
+      if (rawProduct.isDiscontinued) {
+        throw new ProductUnavailableError(productId);
+      }
 
-      const dto = this.converter.toProductDTO(rawProduct);
-      return { ...dto, inventory: rawInventory.count };
-    } catch (err) {
-      throw mapToProductError(err, productId);
+      const product = this.converter.toProductDTO(rawProduct);
+      return { ...product, inventory: rawInventory.count };
+    } catch (error) {
+      if (error instanceof ProductUnavailableError) throw error;
+      throw mapToProductError(error, productId);
     }
   }
 }
 ```
 
-## Data Normalization Layer - Consistent Application Contracts
+## Data Normalization Layer - Stable Contracts at the Boundary
 
 Responsibilities:
 
-- Transform external data into application DTOs
-- Normalize inconsistent backend data fields
+- Transform external data into internal DTOs
+- Normalize inconsistent backend fields
 - Validate required properties
-- Create stable contracts for the rest of the application
+- Expose stable contracts to the rest of the app
 
-Many teams debate what is the best method of doing this. The best practices of yesterday are outdated tomorrow - but still the implementation is less important than the principle. Some teams do direct access to the DB and use Zod to validate schemas but still there are teams out there rocking complex backend projects that serve API data in a certain way that needs adaptations.
+Many teams debate implementation details here: schema validation, mappers, parsers, runtime type guards, or generated clients. These choices evolve over time.
 
-Each application benefits from having a dedicated place where external data becomes internal data.
+The principle remains stable: **have one explicit boundary where external data becomes internal data**.
 
-By normalizing data at a single boundary, the rest of the application can rely on stable DTOs regardless of how backend contracts evolve.
+One important distinction:
+
+- **Converter responsibility:** shape and validate transport data into application contracts
+- **Service/domain responsibility:** make business decisions and enforce business rules
+
+Keeping that boundary clean prevents converters from becoming “mini business layers.”
 
 ```ts
 // converters/ProductConverter.ts
-import { ProductDTO } from '@/types/product';
+import { ProductDTO, RawProduct } from '@/types/product';
+import { ProductDataValidationError } from '@/services/errors';
 
 export class ProductConverter {
-  public toProductDTO(rawData: any): ProductDTO {
-    if (!rawData || !rawData.id) throw new Error('Invalid product data');
+  public toProductDTO(rawData: RawProduct): ProductDTO {
+    if (!rawData?.id) {
+      throw new ProductDataValidationError('Missing required field: id');
+    }
+
+    const numericPrice = Number(rawData.price);
+    if (Number.isNaN(numericPrice) || numericPrice < 0) {
+      throw new ProductDataValidationError('Invalid product price');
+    }
 
     return {
       id: String(rawData.id),
       name: rawData.name ?? rawData.fullName ?? 'Untitled product',
-      priceInCents: Math.round((rawData.price ?? 0) * 100),
+      priceInCents: Math.round(numericPrice * 100),
       isDiscontinued: Boolean(rawData.isDiscontinued),
     };
   }
@@ -150,23 +164,20 @@ Responsibilities:
 - Coordinating asynchronous workflows
 - Providing loading and error states
 
-The Store layer interacts with Services but exposes domain-specific state to the UI.
+The state orchestration layer interacts with Services but exposes domain-specific state to the UI.
 
-Importantly, the Store layer is not always a dedicated state management library.
+Importantly, this does **not** always mean a dedicated global state library.
 
-In modern React applications, solutions such as TanStack Query, framework-level data fetching, or React Server Components may already fulfill parts of this responsibility.
-
-The underlying principle remains the same:
-
-UI components should consume prepared application state rather than orchestrate fetching, transformations, and business workflows themselves.
-
-Whether that state comes from Zustand, Redux, React Query, or Server Components is an implementation detail.
+In modern React applications, TanStack Query, framework data APIs, or React Server Components may cover parts of this role. The underlying principle stays the same: UI components should consume prepared state, not orchestrate fetching, transformations, and business workflows themselves.
 
 ```ts
 // stores/useProductStore.ts
-import create from 'zustand';
+import { create } from 'zustand';
 import { ProductDTO, AsyncStatus } from '@/types/product';
-import { ProductService } from '@/services/product-service';
+import { ProductService } from '@/services/ProductService';
+
+const toError = (value: unknown): Error =>
+  value instanceof Error ? value : new Error('Unexpected error');
 
 type State = {
   product: ProductDTO | null;
@@ -175,23 +186,23 @@ type State = {
   loadProduct: (id: string) => Promise<void>;
 };
 
-export default function createProductStore(productService: ProductService) {
-  return create<State>((set) => ({
+export const createProductStore = (productService: ProductService) =>
+  create<State>((set) => ({
     product: null,
     status: 'idle',
     error: null,
 
     loadProduct: async (id: string) => {
       set({ status: 'loading', error: null });
+
       try {
-        const dto = await productService.getProductDto(id);
+        const dto = await productService.getProductDTO(id);
         set({ product: dto, status: 'success' });
-      } catch (err) {
-        set({ error: err as Error, status: 'error' });
+      } catch (error) {
+        set({ error: toError(error), status: 'error' });
       }
     },
   }));
-}
 ```
 
 ## UI Layer – Rendering and Interaction
@@ -203,26 +214,32 @@ Responsibilities:
 - Triggering actions
 - Managing local UI state
 
-The UI should remain focused on presentation.
+The UI should stay focused on presentation.
 
-When components only need to answer "what should be displayed?" rather than "how does the system work?", they become easier to test, reuse, and understand.
+When components only answer *“what should be displayed?”* rather than *“how does the system work?”*, they are easier to test, reuse, and understand.
 
-```ts
+```tsx
 // pages/ProductPage.tsx
 import React, { useEffect } from 'react';
-import createProductStore from '@/stores/useProductStore';
-import { ProductService } from '@/services/product-service';
 import ApiClient from '@/infra/ApiClient';
-import { ProductConverter } from '@/converters/product-converter';
+import { ProductService } from '@/services/ProductService';
+import { ProductConverter } from '@/converters/ProductConverter';
+import { createProductStore } from '@/stores/useProductStore';
 import ProductView from '@/components/ProductView';
 
+// In larger apps, move this composition to a dedicated composition root.
 const productService = new ProductService(new ApiClient(), new ProductConverter());
 const useProductStore = createProductStore(productService);
 
 export default function ProductPage({ productId }: { productId: string }) {
-  const { product, status, error, loadProduct } = useProductStore();
+  const product = useProductStore((s) => s.product);
+  const status = useProductStore((s) => s.status);
+  const error = useProductStore((s) => s.error);
+  const loadProduct = useProductStore((s) => s.loadProduct);
 
-  useEffect(() => { loadProduct(productId); }, [productId, loadProduct]);
+  useEffect(() => {
+    void loadProduct(productId);
+  }, [productId, loadProduct]);
 
   if (status === 'loading') return <div>Loading…</div>;
   if (status === 'error') return <div>Error: {error?.message}</div>;
@@ -232,17 +249,18 @@ export default function ProductPage({ productId }: { productId: string }) {
 }
 ```
 
-## Why this System helps
+## Why this system helps
 
 ### Predictable Ownership
 
-When a bug appears, developers know where to investigate.
+When a bug appears, teams know where to look first:
 
-- A rendering issue belongs in the UI.
-- A state synchronization issue belongs in the Store.
-- A business rule issue belongs in the Service.
-- A data contract issue belongs in the normalization layer.
-- This dramatically reduces the amount of code that must be inspected when troubleshooting.
+- Rendering issue → UI
+- State synchronization issue → state orchestration layer
+- Business rule issue → Service
+- Data contract issue → Converter
+
+That narrows troubleshooting scope and reduces time to fix.
 
 ### Reduced Coupling
 
@@ -252,70 +270,77 @@ When a bug appears, developers know where to investigate.
 ### Easier Testing
 
 - Services can be tested independently of React.
-- Normalization logic can be tested with simple input/output assertions.
-- Stores can be tested through state transitions.
-- UI components can focus on rendering behavior.
+- Converter logic can be tested with input/output assertions.
+- Store flows can be tested through state transitions.
+- UI tests can focus on rendering and interaction behavior.
 
 ### Faster Onboarding
 
-New team members learn responsibilities quickly because there is a clear answer to a common question:  "Where does this logic belong?" The architecture itself becomes documentation.
+New team members learn faster because there is a clear answer to one recurring question: **“Where should this logic live?”**
+
+| Concern | Best Home |
+| --- | --- |
+| Button click UX, local modal state | UI layer |
+| Loading/error state for a workflow | Store/state orchestration |
+| Retry, fallback, endpoint composition | Service layer |
+| Backend field mismatch (`fullName` vs `name`) | Converter layer |
+| Pricing or availability rule | Service/domain layer |
+| HTTP/transport details | Infrastructure + Service boundary |
 
 ### Dependency Injection and Testability
 
-Dependency Injection often sparks debate in frontend development. For some teams, constructor injection feels unnecessary compared to simple imports. 
+Dependency Injection in frontend can be a polarizing topic. Not every app needs full constructor-based DI.
 
-The important takeaway is not that every application needs full dependency injection. The goal is to avoid tightly coupling business logic to concrete implementations.
+The important point is simpler: avoid hard-coupling business logic to concrete implementations when you need testability and replaceability.
 
-When dependencies can be swapped, mocked, or replaced easily, testing becomes simpler and architectural boundaries become more visible.
-
-Use dependency injection where it provides clear value:
+Use DI where it adds clear value:
 
 - Service testing
 - Mocking APIs
 - Feature-specific implementations
 - Multi-tenant or environment-specific behavior
 
-For smaller applications, straightforward module composition may be entirely sufficient. Choose the simplest approach that preserves clear boundaries.
+For small applications, straightforward module composition can be enough.
 
 ## AI Coding Assistants Make Architecture More Important
 
-AI-assisted development has significantly increased development speed.
+AI-assisted development has increased implementation speed significantly.
 
-However, many generated solutions naturally gravitate toward large components that fetch data, transform it, manage state, and render everything in a single file, if not guided by some Harness configuration.
+But generated code often gravitates toward large, mixed-responsibility components unless the project provides explicit guardrails.
 
-These solutions often work initially but become difficult to maintain as the application grows. The reason for this is that our human brains can process structured data just in a limited way.
+That code can work at first and still become expensive to maintain later.
 
-Clear architectural boundaries provide guardrails not only for developers but also for AI-generated code. Set up some instructions or skills that enable your AI agents to work accordingly so the human can stay in charge. In the end the developer is accountable and responsible for the code in the repository - not the AI Model.
-
-Architecture becomes a shared framework that helps both humans and AI contribute consistently.
+Clear architectural boundaries help both humans and AI produce consistent, predictable changes. Establish coding guidelines or agent instructions that reinforce those boundaries. Ultimately, developers remain accountable for what ships.
 
 ## Addressing Common Objections
 
-**Isn't This Overengineering for Small Apps?**
+**Isn't this overengineering for small apps?**
 
-For prototypes and small applications, the overhead may not be justified. Architecture should solve actual problems, not hypothetical ones. Introduce these patterns when complexity starts creating friction.
+Sometimes yes. For prototypes and very small products, overhead may not be justified. Introduce structure when complexity starts creating friction.
 
-**Doesn't This Add Boilerplate?**
+**Doesn't this add boilerplate?**
 
-Some additional structure is inevitable. However, structure often scales better than flexibility in growing codebases. Many teams find that the investment pays for itself through reduced debugging time and increased confidence when making changes.
+Some structure does add code. In growing systems, that cost is often repaid through easier debugging, safer changes, and better team coordination.
 
-**How Can Teams Adopt It Gradually?**
+**How can teams adopt it gradually?**
 
-Start with a single feature. Refactor one workflow using the pattern. Document the approach. Use it as a reference implementation for future development. Architecture succeeds when it evolves alongside the codebase rather than arriving all at once.
+Start with one feature. Refactor one workflow using this model. Document it as a reference. Let architecture evolve with the codebase.
+
+**What about RSC, framework loaders, or TanStack Query?**
+
+Great options. They may reduce or replace parts of a traditional store layer. The principle still applies: keep responsibilities explicit and boundaries clear.
 
 ## Conclusion
 
-Frontend architecture is not about adding layers or enforcing rigid rules.
+Frontend architecture is not about rigid layers or ceremony.
 
-It is about creating predictable ownership, explicit boundaries, and stable contracts that allow teams to work confidently as applications grow.
+It is about predictable ownership, explicit boundaries, and stable contracts that let teams move quickly without losing control.
 
-Whether you use Services, Converters, Stores, React Query, Server Components, or another variation entirely, the principle remains the same:
+Whether you use Services, Converters, Stores, React Query, framework data APIs, Server Components, or a hybrid approach, the principle remains:
 
 - Make responsibilities obvious
 - Reduce coupling
 - Create clear boundaries
-- Help developers understand where code belongs
+- Help people understand where code belongs
 
-Start small. Refactor a single feature. Document the pattern. Over time, those guardrails can transform a React codebase from a collection of components into a maintainable system that scales with both the application and the team.
-
-Thank you for reading and happy coding :-)
+Start small. Refactor one feature. Document the pattern. Over time, those guardrails can transform a React codebase from a pile of components into a maintainable system that scales with both product and team.
