@@ -302,13 +302,21 @@ For small applications, straightforward module composition can be enough.
 
 ## AI Coding Assistants Make Architecture More Important
 
-AI-assisted development has increased implementation speed significantly.
+AI-assisted development has increased implementation speed significantly. But generated code often gravitates toward large, mixed-responsibility components unless the project provides explicit guardrails.
 
-But generated code often gravitates toward large, mixed-responsibility components unless the project provides explicit guardrails.
+That code can work at first and still become expensive to maintain later. This is not an AI issue. It is a human cognition issue.
 
-That code can work at first and still become expensive to maintain later.
+Our working memory is limited: people cannot reliably reason about too many responsibilities, side effects, and data shapes at the same time. Layered architecture reduces that cognitive load by narrowing the question in front of us.
 
-Clear architectural boundaries help both humans and AI produce consistent, predictable changes. Establish coding guidelines or agent instructions that reinforce those boundaries. Ultimately, developers remain accountable for what ships.
+In a coding harness, when you encode architectural rules in agent instructions, skills, and review checklists, the model has clearer constraints and generates code that is easier to audit.
+
+In practice, this creates a useful feedback loop:
+
+- Better boundaries -> clearer prompts
+- Clearer prompts -> more consistent AI output
+- More consistent output -> lower review and debugging cost
+
+Treat architecture as shared context for both people and assistants. AI can accelerate implementation, but well-defined structure is what keeps that speed sustainable over time. Developers still own the final design and production quality.
 
 ## Addressing Common Objections
 
