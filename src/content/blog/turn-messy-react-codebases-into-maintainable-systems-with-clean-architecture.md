@@ -4,7 +4,7 @@ description: "A practical guide to structuring React apps with clear UI, state, 
 date: 2026-06-21
 readTime: 6 min
 tags:
-  - Architecture
+  - Software Architecture
   - React
   - Clean Architecture
 draft: false

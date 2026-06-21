@@ -100,7 +100,7 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     const articlePage = document.querySelector('.article-page');
     const outlineToggle = articlePage?.querySelector('[data-outline-toggle]');
     const articleOutlineElement = articlePage?.querySelector('[data-outline]');
-    const storageKey = 'article-outline-open';
+    const storageKey = `article-outline-open:${window.location.pathname}`;
 
     if (articlePage && outlineToggle && articleOutlineElement) {
       const setOutlineOpen = (isOpen) => {
