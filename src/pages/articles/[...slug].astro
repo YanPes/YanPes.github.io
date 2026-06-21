@@ -52,44 +52,36 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
       </header>
 
       <div class="article-layout">
-        {
-          articleOutline.length > 0 && (
-            <div class="article-layout-controls">
-              <button
-                type="button"
-                class="article-outline-toggle"
-                aria-expanded="false"
-                aria-controls="article-outline"
-                aria-label="Show article overview"
-                title="Show article overview"
-                data-outline-toggle
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
-          )
-        }
+        <div class="article-layout-controls">
+          <button
+            type="button"
+            class="article-outline-toggle"
+            aria-expanded="false"
+            aria-controls="article-outline"
+            aria-label="Show article overview"
+            title="Show article overview"
+            data-outline-toggle
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
 
         <div class="article-content">
           <Content />
         </div>
-        {
-          articleOutline.length > 0 && (
-            <aside id="article-outline" class="article-outline" aria-label="Article outline" data-outline>
-              <p class="article-outline-title">Overview</p>
+        <aside id="article-outline" class="article-outline" aria-label="Article outline" data-outline>
+          <p class="article-outline-title">Overview</p>
 
-              <ul class="article-outline-list">
-                {articleOutline.map((heading) => (
-                  <li class:list={['article-outline-item', heading.depth === 3 && 'is-subitem']}>
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )
-        }
+          <ul class="article-outline-list">
+            {articleOutline.map((heading) => (
+              <li class:list={['article-outline-item', heading.depth === 3 && 'is-subitem']}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
 
       </div>
     </article>
