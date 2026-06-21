@@ -52,12 +52,32 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
       </header>
 
       <div class="article-layout">
+        {
+          articleOutline.length > 0 && (
+            <div class="article-layout-controls">
+              <button
+                type="button"
+                class="article-outline-toggle"
+                aria-expanded="false"
+                aria-controls="article-outline"
+                aria-label="Show article overview"
+                title="Show article overview"
+                data-outline-toggle
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          )
+        }
+
         <div class="article-content">
           <Content />
         </div>
         {
           articleOutline.length > 0 && (
-            <aside class="article-outline" aria-label="Article outline">
+            <aside id="article-outline" class="article-outline" aria-label="Article outline" data-outline>
               <p class="article-outline-title">Overview</p>
 
               <ul class="article-outline-list">
@@ -76,6 +96,42 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
   </main>
 
   <SiteFooter />
+  <script is:inline>
+    const articlePage = document.querySelector('.article-page');
+    const outlineToggle = articlePage?.querySelector('[data-outline-toggle]');
+    const articleOutlineElement = articlePage?.querySelector('[data-outline]');
+    const storageKey = 'article-outline-open';
+
+    if (articlePage && outlineToggle && articleOutlineElement) {
+      const setOutlineOpen = (isOpen) => {
+        articlePage.dataset.outlineOpen = isOpen ? 'true' : 'false';
+        outlineToggle.setAttribute('aria-expanded', String(isOpen));
+        outlineToggle.setAttribute('aria-label', isOpen ? 'Hide article overview' : 'Show article overview');
+        outlineToggle.setAttribute('title', isOpen ? 'Hide article overview' : 'Show article overview');
+      };
+
+      let initialOpen = false;
+      try {
+        initialOpen = sessionStorage.getItem(storageKey) === 'true';
+      } catch {
+        initialOpen = false;
+      }
+
+      setOutlineOpen(initialOpen);
+
+      outlineToggle.addEventListener('click', () => {
+        const isOpen = articlePage.dataset.outlineOpen === 'true';
+        const nextOpen = !isOpen;
+        setOutlineOpen(nextOpen);
+
+        try {
+          sessionStorage.setItem(storageKey, String(nextOpen));
+        } catch {
+          // Ignore storage errors (private mode / restricted environments)
+        }
+      });
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -111,6 +167,46 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+  }
+
+  .article-layout-controls {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 1 / -1;
+    margin-bottom: -1rem;
+  }
+
+  .article-outline-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-800);
+    color: var(--color-text-300);
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast) var(--ease-default),
+      color var(--duration-fast) var(--ease-default),
+      background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .article-outline-toggle svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .article-outline-toggle:hover,
+  .article-outline-toggle:focus-visible,
+  .article-outline-toggle[aria-expanded='true'] {
+    color: var(--color-accent);
+    border-color: rgba(200, 241, 53, 0.45);
+    background: rgba(200, 241, 53, 0.08);
   }
 
   .article-header h1 {
@@ -149,17 +245,26 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
 
   .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 70ch) minmax(220px, 1fr) ;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: 2rem;
   }
 
+  .article-page[data-outline-open='true'] .article-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  }
+
   .article-outline {
+    display: none;
     border: 1px solid var(--color-border);
     background: var(--color-bg-800);
     padding: 1rem;
     position: sticky;
     top: 7rem;
+  }
+
+  .article-page[data-outline-open='true'] .article-outline {
+    display: block;
   }
 
   .article-outline-title {
@@ -207,7 +312,8 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
 
   .article-content {
     color: var(--color-text-200);
-    max-width: 70ch;
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
   }
 
@@ -335,13 +441,19 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
       padding-top: 2.25rem;
     }
 
-    .article-layout {
+    .article-layout,
+    .article-page[data-outline-open='true'] .article-layout {
       grid-template-columns: 1fr;
       gap: 1.75rem;
     }
 
-    .article-outline {
-      display: none;
+    .article-layout-controls {
+      margin-bottom: -0.5rem;
+    }
+
+    .article-page[data-outline-open='true'] .article-outline {
+      position: static;
+      top: auto;
     }
 
     .article-content {
