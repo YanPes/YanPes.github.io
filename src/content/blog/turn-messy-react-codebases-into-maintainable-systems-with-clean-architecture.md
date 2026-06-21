@@ -7,15 +7,6 @@ tags:
   - Software Architecture
   - React
   - Clean Architecture
-draft: false
----
-
-## Introduction
-
-Every frontend engineer has seen a messy React codebase: components that fetch data, transform it, manage state, and render everything — all at once.
-
-That flexibility is great for prototypes, MVPs, and simple CRUD SPAs. But in large-scale products, with multiple teams and growing domain complexity, it often becomes a liability. Bugs accumulate, onboarding slows down, and maintenance turns into a guessing game.
-
 I have seen teams get stuck in this loop: features breaking unrelated areas, side effects appearing from nowhere, and new hires struggling to understand where business logic actually lives.
 
 At my company, I help teams introduce a lightweight, pragmatic adaptation of Clean Architecture for React. The goal is not to add layers for the sake of architecture. The goal is to create predictable ownership, explicit boundaries, reduced coupling, easier testing, and faster onboarding.
