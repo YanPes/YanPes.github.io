@@ -5,9 +5,9 @@ description: "How to make the right architectural choices when scaling enterpris
 date: 2025-01-29
 readTime: 7 min
 tags:
-  - Architecture
-  - Microfrontends
   - Corporate Strategy
+  - Platform Architecture
+  - Microfrontends
 draft: false
 ---
 

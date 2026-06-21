@@ -5,8 +5,8 @@ date: 2026-06-21
 readTime: 6 min
 tags:
   - Software Architecture
-  - React
   - Clean Architecture
+  - React
 draft: false
 ---
 

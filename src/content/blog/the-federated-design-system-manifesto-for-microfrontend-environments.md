@@ -4,7 +4,7 @@ description: "Design Consistency for Microfrontend Architectures"
 date: 2026-02-25
 readTime: 6 min
 tags:
-  - Architecture
+  - Platform Architecture
   - Microfrontends
   - Design System
 draft: false
