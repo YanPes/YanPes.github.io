@@ -86,8 +86,7 @@
   padding-bottom: 5rem;
 }
 
-.hero-container {
-}
+.hero-container {}
 
 
 .hero-status-list {
@@ -135,6 +134,14 @@
 }
 
 .hero-role {
+  margin-bottom: 1.5rem;
+  color: var(--color-text-100);
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+}
+
+.hero-role-extended {
   margin-bottom: 1.5rem;
   color: var(--color-text-600);
   font-family: var(--font-mono);

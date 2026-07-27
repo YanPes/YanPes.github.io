@@ -6,6 +6,7 @@ interface Props {
   title: string;
   accentName: string;
   role: string;
+  roleExtended: string;
   description: string;
   ctaLabel: string;
   ctaHref: string;
@@ -17,6 +18,7 @@ const {
   title,
   accentName,
   role,
+  roleExtended,
   ctaLabel,
   ctaHref,
   contactLinks,
@@ -34,7 +36,8 @@ const {
       <span class="accent">{accentName}</span>
     </h1>
 
-    <p class="hero-role">//&nbsp;{role}</p>
+    <p class="hero-role">{role}</p>
+    <p class="hero-role-extended">//&nbsp;{roleExtended}</p>
 
     <div class="hero-actions">
       <div class="hero-contact-links" aria-label="Contact links">
