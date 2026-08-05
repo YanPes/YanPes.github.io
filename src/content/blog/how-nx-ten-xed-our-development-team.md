@@ -1,5 +1,5 @@
 ---
-title: "How Nx 10x’ed Our Development Team"
+title: "How Nx 10x'ed Our Development Team"
 description: "What happened when we moved from a legacy monolith and polyrepo microfrontends to an Nx monorepo"
 date: 2026-04-13
 readTime: 9 min
@@ -11,165 +11,171 @@ tags:
 draft: true
 ---
 
+![Article Banner Image](/images/articles/how-nx-ten-xed-our-development-team.webp)
+
 ## Introduction
 
-you probably only get a chance like this once in your career.
+Some engineering challenges are genuinely rare. This is one of those stories.
 
-we were working on a huge e-commerce platform active in 55+ countries, with serious traffic and revenue behind it. the system was about 10 years old and very much “solid but dusty”:
+As the platform architect responsible for the overall frontend architecture overhaul, I have been the main driver and contributor on infrastructure and platform level — designing the system, making the structural calls, and leading the migration work end to end.
+
+You probably only get a chance like this once in your career.
+
+The platform is a large-scale e-commerce system active in 55+ countries, with serious traffic and revenue behind it. When I took over the frontend architecture, the stack was about 10 years old and very much "solid but dusty":
 
 - Java Spring MVC (XML config, no Spring Boot)
 - JSP server-side rendering
 - jQuery + SASS
-- custom React mounting hacks inside legacy pages
+- Custom React mounting hacks inside legacy pages
 
-it had survived for years. but it was no longer built for the speed we needed.
+It had survived for years. But it was no longer built for the speed the business needed.
 
-as part of the relaunch, we also moved into the rsproject ecosystem on the frontend side, using **rslib**, **rstest**, **rspress**, **modern.js**, and first-class support for **Module Federation**. this gave us a modern baseline for building, testing, documenting, and composing microfrontends at scale.
+The first move was decoupling backend and frontend through REST APIs. That helped, but heavy frontend integration pain across distributed teams remained.
 
-our first move was decoupling backend and frontend through REST APIs. that helped, but we still had heavy frontend integration pain across distributed teams.
+The next step was microfrontends with Module Federation — and that was the right strategic direction. As part of that shift, the frontend stack moved into the rsproject ecosystem: **rslib**, **rstest**, **rspress**, **modern.js**, and first-class support for **Module Federation**. That gave a modern baseline for building, testing, documenting, and composing microfrontends at scale.
 
-so we moved into microfrontends with Module Federation.
+But at scale, the polyrepo setup started taxing every team.
 
-that was the right strategic direction. but at scale, our polyrepo setup started taxing every team.
-
-this article is about the next step: why we moved to an Nx monorepo, what worked, what hurt, and what i’d recommend if your team is heading into the same territory.
+This article is about the next step: why the move to an Nx monorepo happened, what worked, what hurt, and what I'd recommend if your team is heading into the same territory.
 
 ## Before vs After (real impact)
 
-here’s the short version of impact from our migration:
+Here's the short version of the impact from the migration:
 
-- **repositories:** 13 repos already migrated into one monorepo (target landscape ~20 repos)
-- **shared library sync work:** from multiple hours (including manual testing loops) down to **a few minutes**
-- **dependency updates:** centralized through **Nx + pnpm workspaces** instead of repeated per-repo churn
-- **developer experience:** less repetitive maintenance, less context switching, less “dull chore” work
+- **Repositories:** 13 repos already migrated into one monorepo (target landscape ~20 repos)
+- **Shared library sync work:** from multiple hours — including manual testing loops — down to **a few minutes**
+- **Dependency updates:** centralized through **Nx + pnpm workspaces** instead of repeated per-repo churn
+- **Developer experience:** less repetitive maintenance, less context switching, less "dull chore" work
 
-that last point matters more than it sounds. this was before coding agents were part of our daily workflow. repetitive maintenance consumed real engineering energy.
+That last point matters more than it sounds. This was before coding agents were part of a daily workflow. Repetitive maintenance consumed real engineering energy.
 
 ## Decision criteria: when polyrepo starts hurting at this scale
 
-polyrepo is not “wrong.” in our early phase, it helped us isolate teams quickly.
+Polyrepo is not "wrong." In the early phase, it helped isolate teams quickly.
 
-but for large federated frontend landscapes, there’s a tipping point.
+But for large federated frontend landscapes, there is a tipping point.
 
-### practical criteria i’d use today
+### Practical criteria I'd use today
 
-if several of these are true for your setup, monorepo should be on the table:
+If several of these are true for your setup, a monorepo should be on the table:
 
-1. **you update the same dependency repeatedly across many repos** (weekly or even daily)
-2. **release confidence depends on cross-repo coordination rituals** instead of predictable automation
-3. **version drift creates recurring integration bugs**
-4. **onboarding requires learning multiple repo conventions for one product domain**
-5. **teams spend more time on repo logistics than product work**
+1. **You update the same dependency repeatedly across many repos** — weekly or even daily
+2. **Release confidence depends on cross-repo coordination rituals** instead of predictable automation
+3. **Version drift creates recurring integration bugs**
+4. **Onboarding requires learning multiple repo conventions for one product domain**
+5. **Teams spend more time on repo logistics than product work**
 
-### example at enterprise scale
+### What this looks like at enterprise scale
 
-imagine 15–20 repos, each with its own scripts, tsconfig flavor, test setup, and release habits. now run a security-related dependency update across all of them. if that operation feels like an incident every time, your architecture is signaling operational misfit—not just tooling inconvenience.
+Imagine 15–20 repos, each with its own scripts, tsconfig flavor, test setup, and release habits. Now run a security-related dependency update across all of them. If that operation feels like an incident every time, the architecture is signaling operational misfit — not just tooling inconvenience.
 
-## Migration pitfalls (and how we handled them)
+## Migration pitfalls (and how I handled them)
 
-this is where most of the real learning sits.
+This is where most of the real learning sits.
 
-### Pitfall 1: trying to migrate everything at once
+### Pitfall 1: Trying to migrate everything at once
 
-we initially underestimated cognitive overload. moving many apps in one go sounds efficient, but it overwhelms people and breaks feedback loops.
+The cognitive overload from moving many apps in one go is easy to underestimate. It sounds efficient on paper, but it overwhelms people and breaks feedback loops.
 
-**what helped:**
-- we created a **cookbook-style migration checklist**
-- we migrated **application by application**
-- we ran several explicit **polishing passes** afterwards
+**What helped:**
+- A **cookbook-style migration checklist**
+- Migrating **application by application**
+- Running several explicit **polishing passes** afterwards
 
-that structure gave us repeatability and calm.
+That structure gave the process repeatability and calm.
 
-we also built a more sophisticated task-runner composition to reduce script chaos. instead of repeating long npm script chains everywhere, we grouped commands into semantic chunks like:
+A more sophisticated task-runner composition also helped reduce script chaos. Instead of repeating long npm script chains everywhere, commands were grouped into semantic chunks like:
 
 - `start-infra`
 - `start-mandatory-remotes`
 - `start-optional-remotes`
 
-that made the Nx setup feel modular—more like lego, less like script archaeology.
+That made the Nx setup feel modular — more like lego, less like script archaeology.
 
-### Pitfall 2: not running `nx reset` often enough
+### Pitfall 2: Not running `nx reset` often enough
 
-during large structural changes, the project graph can get stale or inconsistent. we lost time chasing ghost issues that disappeared after a reset.
+During large structural changes, the project graph can get stale or inconsistent. I lost time chasing ghost issues that disappeared after a reset.
 
-**lesson:** during heavy migration phases, treat `nx reset` as a standard troubleshooting step, not a last resort.
+**Lesson:** During heavy migration phases, treat `nx reset` as a standard troubleshooting step, not a last resort.
 
-### Pitfall 3: optimizing configs too early
+### Pitfall 3: Optimizing configs too early
 
-we tried to optimize `tsconfig`, `.env`, test config, and `package.json` patterns while migration was still moving.
+Trying to optimize `tsconfig`, `.env`, test config, and `package.json` patterns while migration was still moving was a mistake.
 
-that was premature.
+That was premature.
 
-**better approach:** stabilize structure first, then do a dedicated optimization pass at the end. you’ll avoid rework and reduce noise.
+**Better approach:** Stabilize structure first, then do a dedicated optimization pass at the end. It avoids rework and reduces noise significantly.
 
-## Our Nx operating model
+## The Nx operating model
 
-this was not just “put code in one repo.” we needed an operating model teams could trust.
+This was not just "put code in one repo." A working operating model teams could trust was needed.
 
 ### Repository topology
 
 - **apps/** for client-facing microfrontends, SPAs, and full-stack multi-page frontend frameworks
 - **libs/** for shared internal code that previously lived as versioned npm packages in Artifactory
 
-this removed constant package publishing/sync churn for static internal reusable code and made app-lib collaboration much smoother.
+This removed constant package publishing and sync churn for static internal reusable code, and made app-lib collaboration much smoother.
 
 ### Ownership model
 
-we used **CODEOWNERS** to protect boundaries and prevent responsibility bleed.
+**CODEOWNERS** protects boundaries and prevents responsibility bleed.
 
-that was important culturally, not just technically: teams kept ownership of their frontends instead of depending on platform engineers to “own everything.”
+That matters culturally, not just technically. Teams kept ownership of their frontends instead of depending on platform engineers to "own everything."
 
 ### Guardrails and quality gates
 
-we enforced:
-- biome
-- TypeScript type checks
-- unit tests as mandatory for successful Nx builds
+The enforced gates were:
 
-this gave us confidence while moving fast.
+- Biome
+- TypeScript type checks
+- Unit tests as mandatory for successful Nx builds
+
+That gave confidence while moving fast.
 
 ### CI strategy in a zero-trust environment
 
-our company policy made Nx remote cache unavailable (zero-trust restrictions), so we leaned on:
+Company policy made Nx remote cache unavailable due to zero-trust restrictions. The approach leaned on:
 
-- hard caching of redundant generated artifacts
-- heavy usage of `affected` to keep pipelines lean and semantically correct
-- dependency-aware quality flow: build/validate shared libs first, then remotes, then host apps
+- Hard caching of redundant generated artifacts
+- Heavy usage of `affected` to keep pipelines lean and semantically correct
+- Dependency-aware quality flow: build and validate shared libs first, then remotes, then host apps
 
-that sequence created healthy quality entanglement and prevented loose ends from becoming production bugs.
+That sequence creates healthy quality entanglement and prevents loose ends from becoming production bugs.
 
-## What i’d do differently today
+## What I'd do differently
 
-two things, immediately:
+Two things, immediately:
 
-1. **build a generator for new apps from day one**
-   - consistency early beats cleanup later
-2. **plan a strict code freeze during core migration windows**
-   - syncing ongoing feature work into a migration branch was one of the highest stress multipliers
+1. **Build a generator for new apps from day one**
+   - Consistency early beats cleanup later
+2. **Plan a strict code freeze during core migration windows**
+   - Syncing ongoing feature work into a migration branch was one of the highest stress multipliers
 
-## Monorepo readiness checklist (recommended)
+## Monorepo readiness checklist
 
-if you’re evaluating a move, use this quick checklist:
+If you are evaluating this move, here is a quick checklist:
 
-- we have 10+ repos in one product ecosystem (or will soon)
-- shared dependency updates consume significant recurring effort
-- version drift has caused real incidents or regressions
-- teams feel branch/release coordination fatigue
-- we can define clear app/lib boundaries and ownership
-- we can enforce guardrails (lint, typecheck, tests) centrally
-- we can execute migration in phases with a cookbook/checklist
-- we have leadership support for temporary code freeze windows
+- ✅ You have 10+ repos in one product ecosystem, or will soon
+- ✅ Shared dependency updates consume significant recurring effort
+- ✅ Version drift has caused real incidents or regressions
+- ✅ Teams feel branch and release coordination fatigue
+- ✅ Clear app/lib boundaries and ownership can be defined
+- ✅ Guardrails (lint, typecheck, tests) can be enforced centrally
+- ✅ Migration can be executed in phases with a cookbook or checklist
+- ✅ Leadership support for temporary code freeze windows is in place
 
-if you check most of these, the move is probably not “nice to have.” it’s operational risk reduction.
+If most of these are true, the move is probably not "nice to have." It is operational risk reduction.
 
 ## Final thought
 
-microfrontends were still the right direction for us.
+Microfrontends were still the right direction.
 
-but at our scale, polyrepo created too much coordination tax. Nx helped us keep team autonomy while restoring system coherence.
+But at that scale, polyrepo created too much coordination tax. Nx helped keep team autonomy while restoring system coherence.
 
-if architecture looks elegant in diagrams but feels exhausting in daily delivery, that’s your signal.
+If architecture looks elegant in diagrams but feels exhausting in daily delivery, that is your signal.
 
-often the biggest acceleration is not adding more tech.
-it’s removing friction teams carry every day.
+Often the biggest acceleration is not adding more tech.
+It is removing friction teams carry every day.
 
+Happy coding 😎
