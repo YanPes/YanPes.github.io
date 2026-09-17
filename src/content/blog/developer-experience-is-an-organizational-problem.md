@@ -1,6 +1,6 @@
 ---
-title: "Developer Experience Is an Organizational Problem"
-description: "Why slow delivery, recurring bugs, inconsistent design, and painful developer workflows are often symptoms of the organization—not the tooling"
+title: "When Platform Problems Aren't Technical"
+description: "Why slow delivery, recurring bugs, inconsistent experiences, and painful developer workflows often reveal problems beyond the platform"
 date: 2026-04-13
 readTime: 11 min
 tags:
@@ -8,267 +8,271 @@ tags:
   - Developer Experience
   - Platform Engineering
   - Governance
-draft: true
+draft: false
 ---
 
 ## Introduction
 
-We spend a lot of time improving tooling in the name of Developer Experience.
+As a platform architect, I am often asked to solve problems after they have already been given a technical name.
 
-Faster builds. Better documentation. Better CLIs. More automation. A new internal developer portal. Another framework that promises to remove friction.
+Delivery is slow, so the organization asks for better tooling. Teams repeatedly build the same capabilities, so it asks for another shared library. Products feel inconsistent, so it asks for a design system. Developers struggle to navigate the system, so it considers an internal developer portal.
 
-All of these things can help. But some of the biggest sources of developer frustration cannot be fixed by tooling because they are not technical problems at their root.
+Sometimes those are exactly the right investments.
 
-They are organizational.
+But while working across multiple independent teams and dozens of interconnected applications on a global commerce platform, I have learned that the technical request is often only the visible part of the problem.
 
-If it takes three teams and two approvals to ship a small change, a better CLI will not give the team autonomy.
+A platform can automate a good decision. It can turn repeated work into a reusable capability, reduce cognitive load, and give teams a paved road from intent to production.
 
-If nobody knows who owns a part of the system, generating more documentation will not create accountability.
+It cannot create ownership where none exists. It cannot stabilize priorities, clarify an unknown business process, or give teams authority the organization has chosen to centralize.
 
-If every team implements the same capability differently, adding another shared library will not fix the absence of platform strategy and governance.
+Those problems still shape the daily experience of developers. They simply cannot be solved by a developer-experience or platform team alone.
 
-And if a feature takes months because priorities change every week, optimizing the build from six minutes to three is useful—but almost irrelevant to the actual problem.
+> Developer experience is often where organizational problems become visible—not necessarily where they can be solved.
 
-> Developer Experience is the experience of working inside an engineering organization.
+## The technical request is not always the real problem
 
-Once we accept that definition, DX becomes much larger than IDEs, pipelines, and local development environments. It includes ownership, team boundaries, product management, decision-making, governance, cognitive load, feedback loops, and the path from an idea to production.
+Visible friction is attractive because it is measurable and can be assigned to a team.
 
-The tools are part of that system. They are not the whole system.
+A build takes six minutes. A deployment requires five manual steps. Developers cannot find the correct documentation. These are concrete problems, and a platform team can usually investigate them directly.
 
-## The symptoms are visible. The causes are not.
+Organizational friction is harder to see. It appears as waiting, rework, handovers, conflicting decisions, and knowledge that exists only in private conversations. From a distance, all of that time is easily recorded as "development."
 
-Organizations often react to the visible symptom because it is easier to measure and easier to assign to an engineering team.
+This can lead an organization to solve the problem it can see rather than the one producing the delay.
 
-| What people observe | The apparent problem | A possible root cause |
+| What people observe | The technical request | What may be underneath |
 | --- | --- | --- |
-| Shipping takes weeks or months | Delivery performance | Unstable priorities and weak product management |
-| Developers need help from several teams | Too many dependencies | Team boundaries do not match the architecture |
-| Production has many bugs | Poor engineering quality | Business processes and requirements are unclear |
-| Products look inconsistent | Missing design system | Delivery pressure and weak design governance |
-| The UI is unintuitive | Frontend implementation | Little user research or interaction design capability |
-| Every team solves the same problem differently | Lack of standards | Missing platform capabilities and unclear guardrails |
-| Architecture reviews block delivery | Slow approval process | Decisions are too centralized |
-| Onboarding takes months | Missing documentation | The system has too much accidental complexity |
-| Teams constantly fight incidents | Low test coverage | Roadmaps leave no capacity for reliability work |
-| The platform feels restrictive | Bad platform UX | The platform was designed for control, not enablement |
+| Features take months | Improve developer productivity | Priorities and scope change after work begins |
+| Developers depend on several teams | Add better coordination tooling | Team boundaries do not match the flow of work |
+| Production defects repeat | Add more quality gates | Business rules and ownership remain unclear |
+| Every team solves the same problem differently | Publish another standard | No supported shared capability exists |
+| Architecture reviews block delivery | Streamline the approval process | Routine decisions are too centralized |
+| Products look and behave differently | Build a component library | Shared patterns have no effective governance |
+| Onboarding takes months | Write more documentation | The system contains too much accidental complexity |
+| Reliability work never happens | Improve engineering discipline | Roadmaps allocate no capacity for it |
+| The platform feels restrictive | Redesign the portal or CLI | The operating model optimizes for control rather than enablement |
 
-The point is not that every technical problem secretly belongs to management. Bad code exists. Poor technical decisions exist. Sometimes a slow build is simply a slow build.
+None of this means technical problems are imaginary. Bad code exists. Slow pipelines exist. Missing documentation exists.
 
-The point is that we should trace recurring friction far enough back before deciding what to fix.
+> The lesson is simpler: before building a solution, trace recurring friction far enough back to understand what is causing it.
 
-## When features take months, look at the work system
+## Where organizational friction reaches developers
 
-I have seen features take multiple weeks or even months to finish, and the first explanation is often that engineering is too slow.
+Organizational decisions eventually become part of the development environment, even when they are not represented in code.
 
-Sometimes that is true. More often, the feature is moving through a broken work system.
+### Unstable priorities become rework
 
-Several work streams compete for the same people. Priorities change during implementation. Dependencies surface only after development has started. Product decisions arrive late. Teams begin work before the problem, scope, and success criteria are understood.
+When a feature takes months, the first conclusion is often that engineering is too slow.
 
-Developers then absorb the uncertainty. They reopen completed work, switch context, wait for answers, rebuild parts of the feature, and coordinate across teams. From the outside, all of this time is recorded as "development."
+Sometimes that is true. More often, developers are absorbing uncertainty from the wider work system.
 
-This is not mainly a developer productivity problem. It is a prioritization and product management problem.
+Several initiatives compete for the same people. Scope changes during implementation. Dependencies become visible only after development begins. Product decisions arrive late. Teams start work before the problem and the expected outcome are sufficiently understood.
 
-A healthy product foundation does not mean creating more tickets or writing longer requirements documents. It means making deliberate choices:
+Developers then reopen completed work, switch context, wait for answers, rebuild parts of the feature, and coordinate with more teams. The coding may have taken days. The change took months.
 
-- Which problem are we solving?
-- For whom are we solving it?
+A faster build helps the coding loop, but it does not remove the waiting and rework around it.
+
+This is not an argument for longer requirements documents or more tickets. It is an argument for enough clarity to let a team make progress:
+
+- Which problem are we solving, and for whom?
 - Which user flow must work?
 - What is explicitly out of scope?
-- Who can make a decision when assumptions turn out to be wrong?
-- Which other teams or systems does the outcome depend on?
-- How will we know that the change worked?
+- Who can decide when an assumption turns out to be wrong?
+- Which systems and teams does the outcome depend on?
+- How will we know whether the change worked?
 
-Without that foundation, engineering becomes the place where unresolved product questions accumulate. No delivery dashboard or AI coding assistant can compensate for that reliably.
+Without that foundation, unresolved product questions accumulate inside implementation.
 
-## A large number of bugs is not proof of bad developers
+### Unclear business rules become defects
 
-When defect counts rise, the instinctive response is often to add quality gates, demand more tests, or question the competence of the developers.
+A high defect count is also easily interpreted as an engineering-quality problem. The usual response is more tests, more reviews, and more gates.
 
-That diagnosis is frequently too shallow.
+Those measures are valuable when they address the cause. But many defects begin before a line of code is written.
 
-Many bugs begin before a line of code is written. The business process is not documented. Stakeholders know the happy path but not the exceptions. Product owners work from assumptions rather than fine-grained user flows. Two departments describe the same rule differently. Important behavior exists only in the head of one experienced employee.
+A business process may be understood only through experience. Different departments may describe the same rule differently. The happy path may be clear while cancellation, partial failure, or recovery behavior remains unknown. An important decision may exist only in the head of one domain expert.
 
-The developer implements the understanding available at the time. Later, the missing rule appears as a bug.
+The developer implements the understanding available at the time. When a missing rule is discovered in production, it appears as a software defect.
 
-Tests are essential, but tests can only verify the behavior a team knows to specify. If the organization cannot explain what should happen when an order is partially cancelled, a payment is delayed, a user has two roles, or a downstream system is unavailable, the test suite will inherit the same blind spots.
+Tests can verify known behavior. They cannot independently decide what should happen when an order is partially cancelled, a payment is delayed, a customer has conflicting permissions, or a downstream system is unavailable.
 
-A useful bug review therefore asks more than "How did this pass code review?"
+A useful defect review therefore asks more than "How did this pass code review?"
 
 It also asks:
 
 - Was the business rule known and accessible?
-- Was the complete user journey mapped?
-- Did engineering, product, and design share the same understanding?
-- Were edge cases discussed before implementation?
-- Was somebody clearly accountable for the decision?
-- Could the team validate the solution with a real user or domain expert?
+- Did product, engineering, and design share the same understanding?
+- Were failure and recovery paths discussed?
+- Was somebody accountable for resolving ambiguity?
+- Could the team validate the behavior with a user or domain expert?
 
-This changes the conversation from blame to system improvement.
+The goal is not to move blame from engineering to another discipline. It is to understand which part of the system allowed uncertainty to reach production.
 
-## Inconsistent design is often produced by pressure
+### Misaligned boundaries become coordination work
 
-Visual inconsistency across products is commonly treated as a component-library problem. The response is to create a design system, publish it, and tell teams to use it.
+A team may be described as owning a customer outcome while depending on several other teams to change the API, data model, UI foundation, deployment configuration, or runtime environment required to deliver it.
 
-That is necessary, but it is not sufficient.
+That team does not fully own the outcome. It owns one step in a chain of handovers.
 
-Design quality deteriorates when management overloads every quarter, treats maximum utilization as efficiency, and pushes work into delivery before it is ready. Design teams lose the time to explore, test, challenge, and refine. They are pressured to hand something—anything—to development so implementation can begin.
+Better communication can make those handovers friendlier, but it does not remove them. The deeper question is whether team boundaries, system boundaries, and decision boundaries support the same flow of value.
 
-The resulting inconsistency is not caused by a designer forgetting the correct button variant. It is the predictable output of a system that values starting work over understanding it.
+This is where domain ownership, stable team interfaces, and self-service platform capabilities can create significant leverage. They reduce coordination not by scheduling meetings more efficiently, but by removing the need for many of them.
 
-There is a second failure mode. The organization has a living design system, but stakeholders repeatedly demand unique solutions. Designers know the proposal breaks established interaction patterns, yet do not have the mandate or organizational standing to push back. Exceptions become normal, and every exception increases the cost of the next change.
+### Missing ownership becomes documentation work
 
-That is a governance and culture problem.
+When nobody knows who owns a system, the natural response is often a service catalog or documentation initiative.
 
-A design system is not merely a Figma library or a package of components. It is a shared agreement about how product teams make decisions. It needs:
+A catalog can make ownership discoverable. It cannot invent ownership.
 
-- Clear ownership
-- A contribution model
-- A process for evaluating exceptions
-- Support from engineering and product leadership
-- Enough authority for designers to defend consistent patterns
-- Enough flexibility to evolve when a genuinely new need appears
+Meaningful ownership requires:
 
-If leadership overrides the system whenever a senior stakeholder prefers something unique, the design system is not governed. It is optional documentation.
+- An accountable team
+- An understood lifecycle
+- Operational responsibility
+- The authority to change the system
+- Capacity to maintain it
 
-## Weird UX is a capability problem, not a job-title problem
+Without those conditions, an `owner` field becomes the name of the person everyone contacts when something breaks.
 
-Unintuitive interfaces are also too easily assigned to implementation. The frontend team is asked to "make it more user-friendly," or the organization hires someone with UX in their title and assumes the problem is solved.
-
-It is not that simple.
-
-Design is not a protected profession, and titles are inconsistent across the industry. Someone may be excellent at visual design while having little experience in usability research, interaction design, information architecture, or testing with real users. That does not make them a bad designer. It means the organization hired for a broad label instead of the capability it actually needed.
-
-Good UX requires a method:
-
-- Observe how real users perform the task today
-- Understand their vocabulary and mental models
-- Map complete journeys, including failure and recovery
-- Prototype interactions before committing to implementation
-- Test with representative users
-- Feed what was learned back into product decisions
-- Measure the result after release
-
-When these practices are absent, teams substitute internal opinions for evidence. The loudest stakeholder becomes the user. Developers implement polished interfaces that may be perfectly consistent with the specification and still be confusing in reality.
-
-Hiring "a UX designer" is not a strategy. Building the right research, usability, and interaction-design capabilities is.
-
-## More organizational problems wearing a technical costume
-
-The same pattern appears across the engineering system.
-
-### "Developers need to ask three teams to make one change"
-
-The apparent issue is cross-team communication. The deeper problem may be that team boundaries do not align with the flow of value.
-
-If a team owns a user-facing outcome but cannot change the API, data model, deployment configuration, or UI needed to deliver it, it does not truly own the outcome. The architecture and the organization are pulling in different directions.
-
-This is where clear domain ownership, stable team APIs, and platform capabilities reduce coordination—not by making meetings more efficient, but by removing the need for many of them.
-
-### "Nobody knows who owns this system"
-
-This often triggers a documentation initiative. A service catalog can improve discoverability, but a catalog cannot invent ownership.
-
-Ownership needs an accountable team, an understood lifecycle, operational responsibility, and the authority to make changes. Without those things, an "owner" field becomes the name of the person everyone bothers when something breaks.
-
-### "Every team builds the same capability differently"
-
-Teams create their own authentication flows, deployment scripts, observability setup, API clients, or frontend foundations. Leadership concludes that engineers resist standards.
-
-But standards without a usable paved road only describe the desired destination. They do not help teams get there.
-
-A platform should turn repeated organizational expectations into self-service capabilities. It should make the safe and supported path the easiest path while keeping an escape hatch for legitimate exceptions.
-
-### "Architecture is blocking us"
-
-Governance is often blamed when teams wait weeks for a review or need central approval for routine choices.
-
-The answer is not to remove governance entirely. Too much centralized governance creates queues and learned helplessness. Too little creates fragmentation, duplicated solutions, incompatible architectures, and enormous cognitive load.
-
-Good governance defines boundaries within which teams can act independently. It moves common decisions into automated guardrails, reference architectures, and clear principles. Human review is then reserved for decisions that are genuinely novel, risky, or difficult to reverse.
-
-### "New developers take months to become productive"
-
-Better onboarding documentation may help, but slow onboarding is often a measure of accumulated complexity.
-
-How many repositories, approval groups, local services, undocumented conventions, and team-specific workflows must a developer understand before shipping a safe change? How many of those exist for a good reason?
+The same applies to documentation more broadly. Sometimes information is simply missing and should be written down. In other cases, the workflow is difficult to document because responsibility is fragmented across many teams and exceptions.
 
 The goal should not be to document every obstacle perfectly. It should be to remove obstacles until the documentation becomes smaller.
 
-### "We never have time to improve quality"
+### Weak governance becomes inconsistency
 
-Teams stuck in permanent feature pressure accumulate flaky tests, fragile pipelines, outdated dependencies, manual processes, and recurring incidents. Each problem makes delivery slower, which creates more pressure, which removes even more capacity for improvement.
+In federated systems, autonomous teams will make different decisions. That is not a failure; local decision-making is one of the reasons to create autonomous teams in the first place.
 
-This is not a motivation problem. It is a portfolio and capacity-management decision.
+The problem begins when every team must independently decide matters that should be stable across the wider product: authentication, observability, delivery conventions, accessibility, design tokens, or common interaction patterns.
 
-Reliability, platform maintenance, and reducing technical debt must be treated as part of product delivery. If they are scheduled only after all feature work is complete, they will never happen.
+Publishing a standard is not enough. A document describes the desired destination. It does not provide a practical route there.
 
-## The platform response
+A design system, for example, is more than a Figma library or a component package. It is a shared agreement about how teams make product decisions. It needs ownership, a contribution model, a way to evaluate exceptions, and enough organizational support to keep common patterns common.
 
-Platform engineering is powerful because it can convert good organizational decisions into a better daily experience.
+Without that operating model, a design system is optional documentation. Without a usable implementation, it is an aspiration teams must recreate themselves.
 
-A platform can provide paved roads. It can reduce cognitive load, standardize common capabilities, shorten feedback loops, and allow teams to move from intent to production without coordinating every step manually.
+## What a platform can solve
 
-But a platform cannot compensate for unclear ownership, constantly changing priorities, or a culture that does not trust teams.
+Platform engineering is powerful because it can convert repeated and understood needs into capabilities that teams can consume without coordinating every implementation.
 
-Worse, a platform built without empathy can automate the dysfunction. It can turn a slow manual approval into a slow digital approval. It can encode one central team's preferences as mandatory policy. It can advertise self-service while requiring tickets for every meaningful action.
+A platform can provide:
 
-A good platform operating model connects five elements:
+- Self-service project and environment creation
+- Standardized build, test, and deployment workflows
+- Reusable authentication, observability, and integration capabilities
+- Reference architectures for recurring system shapes
+- Shared design and frontend foundations
+- Automated security and compliance guardrails
+- Supported paths for common operational tasks
+- Clear documentation at the point of use
+
+This is where architecture creates leverage.
+
+If eight teams need to make the same low-level decision, the answer should not automatically be eight architecture meetings. When the problem is stable and sufficiently understood, the good decision can often be encoded once in a platform capability, generator, policy, or reusable pattern.
+
+The result is not only standardization. Developers spend less time reconstructing organizational expectations and more time solving problems specific to their product domain.
+
+> A good paved road turns architectural intent into something teams can actually use.
+
+But a paved road is valuable only if it leads where teams need to go. Platform teams must understand their internal users, observe real workflows, and treat adoption as feedback.
+
+When teams repeatedly leave the supported path, the first question should not be "How do we enforce compliance?" It should be "What need does the path fail to support?"
+
+Sometimes the answer is better enablement. Sometimes a guardrail is justified. Sometimes the platform abstraction is wrong.
+
+## What a platform cannot solve
+
+A platform cannot compensate for every weakness in the operating model around it.
+
+It cannot decide which customer problem matters most. It cannot reconcile contradictory business rules. It cannot assign accountability when leadership avoids doing so. It cannot create capacity for reliability work when every planning cycle is filled beyond capacity.
+
+Most importantly, it cannot manufacture autonomy.
+
+A portal may expose a self-service button, but if every meaningful action still requires a ticket and central approval, the experience is not self-service. The interface has changed; the decision model has not.
+
+This is how platforms accidentally automate dysfunction:
+
+- A slow manual approval becomes a slow digital approval
+- One central team's preferences become mandatory defaults
+- A fragmented ownership model becomes a larger service catalog
+- An unclear process becomes a more polished workflow
+- Organizational dependencies become API dependencies without being removed
+
+The tooling may be technically successful while the original friction remains.
+
+Recognizing this boundary is not an excuse for platform teams to disengage. It is part of the job. A platform architect should be able to explain when a problem needs a technical capability, an organizational decision, or both.
+
+## Diagnose before you automate
+
+Before starting the next platform or developer-experience initiative, follow a real change from idea to production.
+
+Do not measure only coding time. Look for:
+
+- Time spent waiting for decisions
+- Priority and scope changes after work begins
+- Team handovers
+- Manual approvals
+- Reopened work
+- Private knowledge required to proceed
+- Exceptions to the supported path
+- Decisions repeatedly escalated to central groups
+
+Then keep asking what constraint makes each step necessary.
+
+If deployments are slow, is the pipeline technically slow, or is release ownership unclear?
+
+If teams ignore a standard, is it poorly communicated, or does the supported path fail their actual needs?
+
+If documentation is missing, did somebody neglect to write it, or is ownership too fragmented for anyone to describe the complete workflow?
+
+If defects repeat, is test coverage too low, or do business rules keep arriving through production incidents?
+
+If an architecture review creates a queue, does the decision genuinely require central judgment, or could teams act independently within an established boundary?
+
+This kind of diagnosis needs quantitative and qualitative evidence. Build duration and deployment frequency matter, but so do:
+
+- Waiting time compared with active implementation time
+- Number of team handovers per change
+- Frequency of priority changes after work begins
+- Time from first implementation to validated user outcome
+- Adoption and escape rates for supported platform paths
+- Onboarding time to the first meaningful production change
+- Recurring defects caused by unresolved domain rules
+- Exceptions to architecture and design-system standards
+
+Dashboards can show where flow slows down. Conversations and observation help explain why.
+
+## Architecture should create organizational leverage
+
+A healthy platform operating model connects five elements:
 
 1. **Clear ownership** gives teams an accountable scope.
-2. **Sensible team boundaries** reduce handovers and coordination.
-3. **Platform capabilities** provide reusable, self-service paths.
-4. **Appropriate governance** establishes guardrails and manages exceptions.
-5. **Team autonomy** lets people make local decisions and own the outcome.
+2. **Sensible boundaries** reduce unnecessary handovers.
+3. **Platform capabilities** make recurring needs available through self-service.
+4. **Appropriate governance** defines guardrails and manages legitimate exceptions.
+5. **Team autonomy** allows local decisions within those boundaries.
 
-These elements reinforce one another. Remove one, and the others become less effective.
+These elements reinforce one another.
 
 A paved road without autonomy is a controlled lane.
 
-Autonomy without governance becomes fragmentation.
+Autonomy without shared boundaries becomes fragmentation.
 
-Governance without platform capabilities becomes a collection of documents and approval meetings.
+Governance without usable platform capabilities becomes documents and approval meetings.
 
-A platform without ownership becomes another team that everyone depends on and nobody understands.
+A platform without clear ownership becomes another team everyone depends on and nobody understands.
 
-## Diagnose DX as a system
+The role of architecture is not to centralize every decision. It is to identify which decisions need to remain coherent, encode the repeatable ones into platforms and patterns, and create enough clarity for teams to make the rest independently.
 
-Before launching the next Developer Experience initiative, start with the friction developers actually encounter.
-
-Follow one change from idea to production. Measure waiting time as well as coding time. Count handovers, approvals, unclear decisions, and reopened work. Ask where developers need private knowledge or personal relationships to make progress.
-
-Then keep asking why.
-
-If deployments are slow, is the pipeline technically slow—or is release ownership unclear?
-
-If teams ignore the standard, is the standard poorly communicated—or does the supported path fail their real needs?
-
-If documentation is missing, did someone neglect to write it—or is ownership so fragmented that nobody can describe the whole workflow?
-
-If bugs repeat, is coverage too low—or do requirements keep arriving through production incidents?
-
-The best DX metrics also need to reach beyond tool performance. Build duration and deployment frequency matter, but so do:
-
-- Time spent waiting for decisions
-- Number of team handovers per change
-- Frequency of priority changes after work begins
-- Time from first commit to validated user outcome
-- Percentage of common capabilities available through self-service
-- Onboarding time to the first meaningful production change
-- Recurring defects caused by unclear business rules
-- Exceptions to platform and design-system standards
-
-This is where qualitative research matters as much as dashboards. Talk to developers. Observe how work moves. A developer survey can reveal frustration; following the work can reveal the system that produces it.
+That is what I mean by architectural leverage: not making more decisions for teams, but helping teams make more good decisions without you.
 
 ## Final thought
 
-Developer Experience is not a layer we add on top of an engineering organization. It is an outcome of how that organization operates.
+Technical friction is real, and good tooling can transform daily development. Faster feedback, reliable environments, thoughtful APIs, clear documentation, and well-designed self-service capabilities all matter.
 
-Tooling still matters. Fast builds, clear documentation, reliable environments, and thoughtful APIs can transform daily work. But they create lasting value only when they support clear ownership, strong product practices, capable design, appropriate governance, and genuine team autonomy.
+But tools operate inside an organization. Their effectiveness depends on ownership, priorities, team boundaries, governance, domain knowledge, and trust.
 
-You cannot tool your way out of an organizational problem.
+When we mistake an organizational constraint for a tooling gap, we risk building a polished interface around the same old problem.
 
-You can, however, redesign the organization and its platform so that the right way of working becomes the easy way of working.
+The better response is to diagnose the system first. Fix the organizational constraint where necessary. Build a platform capability where repetition makes it valuable. Then encode the right way of working so it becomes the easy way of working.
 
-That is the real promise of Developer Experience: autonomous teams moving fast without architectural chaos.
+That is how platform architecture creates leverage: autonomous teams moving fast without architectural chaos.
 
 Happy coding 😎
