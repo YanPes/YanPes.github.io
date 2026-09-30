@@ -42,25 +42,25 @@ export const contactLinks: ContactLink[] = [
     label: 'GitHub',
     href: 'https://github.com/YanPes',
     platform: 'github',
-    iconSrc: 'https://api.iconify.design/simple-icons:github.svg?color=%23ffffff',
+    iconSrc: 'https://api.iconify.design/simple-icons:github.svg?color=%239ece6a',
   },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/yannik-peschke-a48012108/',
     platform: 'linkedin',
-    iconSrc: 'https://api.iconify.design/simple-icons:linkedin.svg?color=%23ffffff',
+    iconSrc: 'https://api.iconify.design/simple-icons:linkedin.svg?color=%239ece6a',
   },
   {
     label: 'X / Twitter',
     href: 'https://x.com/_yanpes',
     platform: 'x',
-    iconSrc: 'https://api.iconify.design/simple-icons:x.svg?color=%23ffffff',
+    iconSrc: 'https://api.iconify.design/simple-icons:x.svg?color=%239ece6a',
   },
   {
     label: 'Discord',
     href: 'https://discordapp.com/users/rettichmann',
     platform: 'discord',
-    iconSrc: 'https://api.iconify.design/simple-icons:discord.svg?color=%23ffffff',
+    iconSrc: 'https://api.iconify.design/simple-icons:discord.svg?color=%239ece6a',
   },
 ];
 

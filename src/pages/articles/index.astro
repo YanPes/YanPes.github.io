@@ -12,152 +12,129 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 
 <BaseLayout title="Articles — Yannik Peschke" description="Technical articles and notes by Yannik Peschke.">
   <SiteNav logo="Yannik Peschke" links={navLinks} />
-
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="section-shell articles-page">
       <header class="articles-header">
-        <p class="articles-eyebrow">Articles</p>
-        <h1 class="articles-title">Overview of my Articles</h1>
+        <h1>Articles</h1>
+        <p class="articles-subtitle">Notes on architecture, engineering platforms, and the teams behind them.</p>
       </header>
-
       <div class="articles-list">
         {posts.map((post) => (
           <article class="article-row">
             <a href={`/articles/${post.slug}`} class="article-link">
+              <div class="article-row-meta">
+                <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                <span>{post.data.readTime}</span>
+              </div>
               <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
+              <p class="article-row-description">{post.data.description}</p>
+              <span class="article-row-read">Read article <span aria-hidden="true">→</span></span>
             </a>
-            <p class="article-meta">
-              {post.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </p>
           </article>
         ))}
       </div>
     </section>
   </main>
-
   <SiteFooter />
 </BaseLayout>
 
 <style>
-  .articles-page {
-    padding-top: 3rem;
-  }
-
   .articles-header {
-    margin-bottom: 2rem;
-    max-width: 68ch;
+    max-width: 48rem;
+    margin-bottom: 2.5rem;
   }
 
   .articles-eyebrow {
+    margin-bottom: 1rem;
+    color: var(--color-text-500);
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: var(--font-ui-size);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-text-600);
-    margin-bottom: 0.5rem;
   }
 
-  .articles-title {
-    font-family: var(--font-mono);
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: var(--color-text-100);
-    margin-bottom: 0.75rem;
+  .articles-eyebrow span {
+    color: var(--color-accent);
+    margin-right: 0.5rem;
+  }
+
+  .articles-header h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
   }
 
   .articles-subtitle {
     color: var(--color-text-500);
-    max-width: 52ch;
+    font-size: 1.25rem;
+    line-height: 1.6;
   }
 
   .articles-list {
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-900);
   }
 
-  .article-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .article-row:last-child {
-    border-bottom: 0;
+  .article-row + .article-row {
+    border-top: 1px solid var(--color-border);
   }
 
   .article-link {
+    display: block;
+    padding: clamp(1.5rem, 3vw, 2rem);
     text-decoration: none;
+    transition: background var(--duration-fast);
+  }
+
+  .article-link:hover, .article-link:focus-visible {
+    background: var(--color-bg-800);
+  }
+
+  .article-link:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .article-row-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-600);
+    font-family: var(--font-mono);
+    font-size: var(--font-ui-size);
   }
 
   .article-link h2 {
-    font-size: 1.15rem;
-    margin-bottom: 0.35rem;
+    max-width: 48ch;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-100);
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
   }
 
-  .article-link p,
-  .article-meta {
+  .article-link:hover h2, .article-link:focus-visible h2 {
+    color: var(--color-accent);
+  }
+
+  .article-row-description {
+    max-width: 70ch;
     color: var(--color-text-500);
-    font-size: 0.95rem;
+    font-size: 1.125rem;
+    line-height: 1.65;
   }
 
-  .article-meta {
-    flex-shrink: 0;
+  .article-row-read {
+    display: inline-flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--color-accent);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  @media (max-width: 900px) {
-    .articles-page {
-      padding-top: 2.2rem;
-    }
-
-    .article-row {
-      padding: 1rem;
-    }
-  }
-
-  @media (max-width: 720px) {
-    .article-row {
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .article-meta {
-      width: 100%;
-      justify-content: flex-start;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .articles-page {
-      padding-top: 1.75rem;
-    }
-
-    .articles-title {
-      font-size: clamp(1.4rem, 7.2vw, 1.85rem);
-    }
-
-    .articles-subtitle {
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .article-link h2 {
-      font-size: 1rem;
-      line-height: 1.35;
-    }
-
-    .article-link p,
-    .article-meta {
-      font-size: 0.85rem;
-    }
+    font-size: var(--font-ui-size);
   }
 </style>
