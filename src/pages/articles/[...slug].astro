@@ -270,7 +270,7 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
   .article-content :global(h2)::before {
     content: '#';
     position: absolute;
-    top: 16px;
+    top: 0.675em;
     left: 0;
     transform: translateY(-50%);
     color: var(--color-accent);
@@ -289,7 +289,7 @@ const articleOutline = headings.filter(({ depth }) => depth === 2 || depth === 3
   .article-content :global(h3)::before {
     content: '##';
     position: absolute;
-    top: 13px;
+    top: 0.84375em;
     left: 0;
     transform: translateY(-50%);
     color: var(--color-text-600);
