@@ -7,7 +7,6 @@ interface Props {
   accentName: string;
   role: string;
   roleExtended: string;
-  description: string;
   ctaLabel: string;
   ctaHref: string;
   contactLinks: ContactLink[];
@@ -40,17 +39,16 @@ const {
     <p class="hero-role-extended">//&nbsp;{roleExtended}</p>
 
     <div class="hero-actions">
+      <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
       <div class="hero-contact-links" aria-label="Contact links">
         {
-        contactLinks.map((link) => (
-        <a href={link.href} class="hero-contact-link" target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-          <img src={link.iconSrc} alt="" loading="lazy" decoding="async" />
-        </a>
-        ))
+          contactLinks.map((link) => (
+            <a href={link.href} class="hero-contact-link" target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label}>
+              <img src={link.iconSrc} alt="" loading="lazy" decoding="async" />
+            </a>
+          ))
         }
       </div>
-      <a href={ctaHref} class="hero-cta">{ctaLabel}</a>
-
     </div>
   </div>
 </section>

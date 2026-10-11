@@ -1,22 +1,30 @@
 :root {
-  --color-accent: #c8f135;
-  --color-accent-dim: #8fb025;
-  --color-bg-900: #0a0a0a;
-  --color-bg-800: #111111;
-  --color-bg-700: #161616;
+  --color-accent: #9ece6a;
+  --color-accent-dim: #b5d98e;
+  --color-accent-rgb: 158, 206, 106;
+  --color-accent-cyan: #7dcfff;
+  --color-green: #9ece6a;
+  --color-purple: #bb9af7;
+  --color-orange: #ff9e64;
+  --color-bg-900: #24283b;
+  --color-bg-800: #292e42;
+  --color-bg-700: #30364d;
   --color-text-100: #ffffff;
-  --color-text-200: #e8e8e0;
-  --color-text-500: #888880;
-  --color-text-600: #5a5a52;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-accent: rgba(200, 241, 53, 0.3);
+  --color-text-200: #ffffff;
+  --color-text-500: #a9b1d6;
+  --color-text-600: #9aa5ce;
+  --color-text-300: #ffffff;
+  --color-border: rgba(122, 162, 247, 0.18);
+  --color-border-accent: rgba(158, 206, 106, 0.4);
 
   --font-mono: 'JetBrains Mono', monospace;
   --font-sans: 'Source Sans 3', sans-serif;
 
-  --gutter: clamp(1.5rem, 5vw, 6rem);
-  --section-space: clamp(3rem, 6vw, 4rem);
-  --content-max-width: 1440px;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --section-space: clamp(3rem, 6vw, 4.5rem);
+  --content-max-width: 1280px;
+  --nav-height: 5rem;
+  --font-ui-size: 0.8125rem;
   --radius-sm: 2px;
 
   --duration-fast: 150ms;

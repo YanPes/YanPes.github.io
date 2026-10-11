@@ -6,7 +6,7 @@ import HeroSection from '../components/HeroSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteNav from '../components/SiteNav.astro';
 import TerminalSection from '../components/TerminalSection.astro';
-import { type ArticleItem, heroContent, navLinks, stackItems, stats } from '../data/siteContent';
+import { type ArticleItem, heroContent, navLinks } from '../data/siteContent';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -39,7 +39,7 @@ const recentArticles = posts.slice(1, 3).map((post) => toArticleCard(post));
 <BaseLayout>
   <SiteNav logo="Yannik Peschke" links={navLinks} />
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <HeroSection {...heroContent} />
     <ArticlesSection featured={featuredArticle} items={recentArticles} />
     <TerminalSection />

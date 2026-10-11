@@ -25,11 +25,12 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
         rel="stylesheet"
       />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="scroll-progress" aria-hidden="true" hidden>
       <div class="scroll-progress__bar"></div>
     </div>
@@ -37,13 +38,15 @@ const {
     <slot />
 
     <script>
-      const scalingFactor = 2;
-      const maxOffset = 16;
+      const scalingFactor = 2.5;
+      const maxOffset = 20;
       const scrollProgress = document.querySelector('.scroll-progress');
       const scrollProgressBar = document.querySelector('.scroll-progress__bar');
-      const isArticlesRoute = window.location.pathname.startsWith('/articles');
+      const isArticlesRoute = /^\/articles\/[^/]/.test(window.location.pathname);
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      const updateGridOffset = (event) => {
+      const updateGridOffset = (event: PointerEvent) => {
+        if (motionPreference.matches || event.pointerType !== 'mouse') return;
         const viewportCenterX = window.innerWidth / 2;
         const viewportCenterY = window.innerHeight / 2;
         const normalizedX = (event.clientX - viewportCenterX) / viewportCenterX;
@@ -75,8 +78,9 @@ const {
         );
       };
 
-      window.addEventListener('pointermove', updateGridOffset);
-      window.addEventListener('pointerleave', resetGridOffset);
+      window.addEventListener('pointermove', updateGridOffset, { passive: true });
+      document.documentElement.addEventListener('pointerleave', resetGridOffset);
+      motionPreference.addEventListener('change', resetGridOffset);
 
       if (isArticlesRoute) {
         updateScrollProgress();
